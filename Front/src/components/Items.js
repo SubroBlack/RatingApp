@@ -1,16 +1,9 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
+import { useSelector } from "react-redux";
 
 const Items = () => {
   // Main Items to be reviewed
-  const [items, setItems] = useState("");
-
-  // Fetching data
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/api/items")
-      .then((items) => setItems(items.data));
-  }, []);
+  const items = useSelector((state) => state.items);
 
   if (!items) {
     return null;
