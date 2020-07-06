@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Items = () => {
   // Main Items to be reviewed
@@ -14,7 +15,9 @@ const Items = () => {
   const show = () => {
     return items.map((item) => (
       <div key={item.id}>
-        <b>{item.name}</b>
+        <Link to={`/items/${item.id}`}>
+          <b> {item.name}</b>
+        </Link>
         <h3>{item.category}</h3>
       </div>
     ));
