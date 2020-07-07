@@ -12,6 +12,8 @@ const app = express();
 
 //Express json parser
 app.use(express.json());
+// To enable serving static build folder of frontend
+app.use(express.static("build"));
 
 mongoose
   .connect(config.MONGODB_URI, {
