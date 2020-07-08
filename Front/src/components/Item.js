@@ -20,7 +20,7 @@ const Item = () => {
       <div key={item.id}>
         <h3>Details</h3>
         <b>{item.name}</b>
-        <h3>{item.category}</h3>
+        <h3>Category: {item.category}</h3>
         <p>{item.description}</p>
       </div>
     );
