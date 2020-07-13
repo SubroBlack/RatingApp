@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -8,6 +7,8 @@ const itemsRouter = require("./controllers/items");
 
 const config = require("./utils/config");
 const { unknownEndpoint, errorHandler } = require("./utils/middleware");
+const userRouter = require("./controllers/user");
+const loginRouter = require("./controllers/login");
 
 const app = express();
 
@@ -34,6 +35,8 @@ app.get("/", (req, res) => {
   res.send("HELLO Fucking WORLD");
 });
 
+app.use("/api/user", userRouter);
+app.use("/api/login", loginRouter);
 app.use("/api/items/", itemsRouter);
 
 // Middlewares
