@@ -20,6 +20,12 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  items: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Item",
+    },
+  ],
 });
 
 userSchema.plugin(uniqueValidator);

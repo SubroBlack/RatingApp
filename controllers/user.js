@@ -1,6 +1,7 @@
 const userRouter = require("express").Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const User = require("../models/user.js");
 
@@ -19,7 +20,7 @@ userRouter.post("/", async (req, res) => {
     console.log(
       "AdminPin",
       req.body.adminPin,
-      " the legth ",
+      " the length ",
       req.body.adminPin.length
     );
     return res.status(400).json({ error: "Admin pin must be 4 digit code" });

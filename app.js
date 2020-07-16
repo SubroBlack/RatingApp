@@ -9,6 +9,7 @@ const config = require("./utils/config");
 const { unknownEndpoint, errorHandler } = require("./utils/middleware");
 const userRouter = require("./controllers/user");
 const loginRouter = require("./controllers/login");
+const middleware = require("./utils/middleware");
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
   res.send("HELLO Fucking WORLD");
 });
 
+app.use(middleware.tokenExtractor);
 app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/items/", itemsRouter);
