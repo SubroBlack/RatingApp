@@ -19,6 +19,7 @@ const Items = () => {
           <b> {item.name}</b>
         </Link>
         <h3>{item.category}</h3>
+        <p>{item.review ? "Reviews stack returned " : "No Review Array"}</p>
       </div>
     ));
   };

@@ -2,30 +2,6 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const loginRouter = require("express").Router();
 const User = require("../models/user");
-const helper = require("../utils/helper");
-
-// Login as Admin
-loginRouter.post("/admin/", async (req, res) => {
-  const body = req.body;
-  const user = await helper.signedUser(req, res);
-  const validAdmin =
-    user === null
-      ? false
-      : await bcrypt.compare(body.adminPin, user.adminPinHash);
-  if (!(user && validAdmin)) {
-    return res.status(401).json({
-      error: "Wrong Admin Pin",
-    });
-  }
-
-  const adminForToken = {
-    name: user.name,
-    email: user.email,
-    id: user._id,
-  };
-  const adminToken = jwt.sign(adminForToken, process.env.ADMIN_SECRET);
-  res.status(200).send({ adminToken, name: user.name });
-});
 
 // TO handle SignIn
 loginRouter.post("/", async (req, res) => {
@@ -46,10 +22,35 @@ loginRouter.post("/", async (req, res) => {
     name: user.name,
     email: user.email,
     id: user._id,
+    role: "user",
   };
   const token = jwt.sign(userForToken, process.env.SECRET);
 
-  res.status(200).send({ token, name: user.name });
+  res.status(200).send({ token, role: "user" });
+});
+
+// Login as Admin
+loginRouter.post("/admin/", async (req, res) => {
+  const body = req.body;
+  const user = req.user;
+  const validAdmin =
+    user === null
+      ? false
+      : await bcrypt.compare(body.adminPin, user.adminPinHash);
+  if (!(user && validAdmin)) {
+    return res.status(401).json({
+      error: "Wrong Admin Pin",
+    });
+  }
+
+  const adminForToken = {
+    name: user.name,
+    email: user.email,
+    id: user._id,
+    role: "admin",
+  };
+  const token = jwt.sign(adminForToken, process.env.SECRET);
+  res.status(200).send({ token, role: "admin" });
 });
 
 module.exports = loginRouter;

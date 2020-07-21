@@ -25,6 +25,7 @@ const itemSchema = mongoose.Schema({
   },
 });
 
+// Return items to admin with all needed details
 itemSchema.set("toJSON", {
   transform: (document, returnedDocument) => {
     returnedDocument.id = returnedDocument._id.toString();
@@ -32,6 +33,17 @@ itemSchema.set("toJSON", {
     delete returnedDocument.__v;
     // Hide the reviews
     //delete returnedDocument.review;
+  },
+});
+
+// Returning items to user with reviews omitted
+itemSchema.set("toObject", {
+  transform: (document, returnedDocument) => {
+    returnedDocument.id = returnedDocument._id.toString();
+    delete returnedDocument._id;
+    delete returnedDocument.__v;
+    // Hide the reviews
+    delete returnedDocument.review;
   },
 });
 

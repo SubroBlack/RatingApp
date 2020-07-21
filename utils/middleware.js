@@ -1,12 +1,18 @@
+const jwt = require("jsonwebtoken");
+const User = require("../models/user");
+
 // Token Extractor
-const tokenExtractor = (req, res, next) => {
+const tokenExtractor = async (req, res, next) => {
   const auth = req.get("auth");
   if (auth && auth.toLowerCase().startsWith("bearer ")) {
-    req.token = auth.substring(7);
-  }
-  const adminToken = req.get("admin");
-  if (adminToken && adminToken.toLowerCase().startsWith("bearer ")) {
-    req.adminToken = adminToken.substring(7);
+    const token = auth.substring(7);
+    const decodedToken = jwt.verify(token, process.env.SECRET);
+    if (!token || !decodedToken.id) {
+      return res.status(401).json({ error: "Token Missing or Invalid" });
+    }
+    const user = await User.findById(decodedToken.id);
+    req.user = user;
+    req.role = decodedToken.role;
   }
   next();
 };

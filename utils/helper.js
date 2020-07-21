@@ -4,20 +4,18 @@ const jwt = require("jsonwebtoken");
 const Item = require("../models/item");
 const User = require("../models/user");
 
-// Checking if the logged User is Admin
-const signedAdmin = async (req, res) => {
+// Checking if the logged User is Admin or User
+const signedRole = async (req, res) => {
   const user = await signedUser(req, res);
   if (!user || user === null) {
     return res.status(401).json({ error: "You have to be Signed In" });
   }
-  const adminToken = req.adminToken;
-  const decodedAdminToken = jwt.verify(adminToken, process.env.ADMIN_SECRET);
-  if (!adminToken || !decodedAdminToken.id) {
+  const token = req.token;
+  const decodedToken = jwt.verify(token, process.env.SECRET);
+  if (!token || !decodedToken.id) {
     return res.status(401).json({ error: "Token Missing or Invalid" });
   }
-  const admin = await User.findById(decodedAdminToken.id);
-  console.log("Admin: ", admin);
-  return admin;
+  return decodedToken.role;
 };
 
 // Checking the signedin user:
@@ -32,7 +30,9 @@ const signedUser = async (req, res) => {
   return user;
 };
 
+/*
 module.exports = {
   signedUser,
-  signedAdmin,
+  signedRole,
 };
+*/

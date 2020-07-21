@@ -17,7 +17,6 @@ const app = express();
 app.use(express.json());
 // To enable serving static build folder of frontend
 app.use(express.static("build"));
-//app.use(express.static(path.resolve(__dirname, "./Front/build")));
 
 mongoose
   .connect(config.MONGODB_URI, {

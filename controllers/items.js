@@ -2,20 +2,28 @@ const itemsRouter = require("express").Router();
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const Item = require("../models/item");
-const User = require("../models/user");
-const helper = require("../utils/helper");
 
 // Fetching all the items in the DB by Admin
 itemsRouter.get("/", async (req, res) => {
-  const user = await helper.signedAdmin(req, res);
+  const user = req.user;
+  const role = req.role;
+  console.log(" Items Controller: Role: ", role);
   items = await Item.find({ user: user._id });
   //mongoose.connection.close();
-  res.json(items.map((item) => item.toJSON()));
+  if (role === "admin") {
+    res.json(items.map((item) => item.toJSON()));
+  } else if (role === "user") {
+    res.json(items.map((item) => item.toObject()));
+  }
 });
 
 // Posting new item to be reviewed
 itemsRouter.post("/", async (req, res) => {
-  const user = await helper.signedAdmin(req, res);
+  const user = req.user;
+  const role = req.role;
+  if (role !== "admin") {
+    return res.status(401).json({ error: "Admin mode not signed in" });
+  }
   const newItem = new Item({
     name: req.body.name,
     category: req.body.category,
@@ -31,7 +39,13 @@ itemsRouter.post("/", async (req, res) => {
 
 //Rating an item
 itemsRouter.put("/:id", async (req, res, next) => {
-  const user = await helper.signedUser(req, res);
+  const user = req.user;
+  const role = req.role;
+  if (role !== "admin") {
+    return res.status(401).json({ error: "Admin cannot leave review" });
+  } else if (role !== "user") {
+    return res.status(401).json({ error: "Sign In to leave a review" });
+  }
   const review = {
     comment: req.body.review.comment ? req.body.review.comment : null,
     rate: Number(req.body.review.rate),
