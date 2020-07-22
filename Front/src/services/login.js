@@ -11,10 +11,8 @@ const login = async (credentials) => {
 
 // POST req to admin login
 const adminLogin = async (credentials) => {
-  const config = helper.loggedUserConfig();
-  console.log("adminLoggedIN service, it reached here: ", credentials);
+  const config = helper.loggedUserConfig(); // Passing user token
   const res = await axios.post(adminUrl, credentials, config);
-  console.log("adminLoggedIN service: ", res.data);
   return res.data;
 };
 

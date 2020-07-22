@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
 import { initializeItems } from "./reducers/items";
 import { useDispatch, useSelector } from "react-redux";
 import Items from "./components/Items";
@@ -7,33 +7,44 @@ import Item from "./components/Item";
 import "./App.css";
 import Auth from "./components/Auth";
 import { setLoggedUser } from "./reducers/login";
+import LoginForm from "./components/LoginForm";
 
 const App = () => {
   const dispatch = useDispatch();
-
-  // Fetching data
-  useEffect(() => {
-    dispatch(initializeItems());
-  }, [dispatch]);
+  const history = useHistory();
 
   // Setting up Logged In User
   useEffect(() => {
+    console.log("Setting Logged: ");
     dispatch(setLoggedUser());
+    console.log("Logged Set: ");
   }, [dispatch]);
 
   // Logged in User
   const logged = useSelector((state) => state.logged);
   console.log("APP Logged: ", logged);
 
+  // Fetching data according the role of user signed in
+  useEffect(() => {
+    console.log("Fetching Items: ");
+    dispatch(initializeItems());
+    console.log("Items Fetched: ");
+  }, [logged, dispatch]);
+
+  const gotoHome = () => {
+    history.push("/");
+  };
+
   return (
     <div className="App">
-      Hello World!!
+      <h2 onClick={gotoHome}>Rating App</h2>
+      <Auth />
       <Switch>
         <Route path="/items/:id">
           <Item />
         </Route>
         <Route path="/login">
-          <Auth />
+          <LoginForm />
         </Route>
         <Route path="/">
           <Items />

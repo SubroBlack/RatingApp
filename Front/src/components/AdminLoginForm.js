@@ -22,15 +22,8 @@ const AdminLoginForm = () => {
     history.push("/");
   };
 
-  // Cancel the login process
-  const cancel = (event) => {
-    event.preventDefault();
-    history.push("/");
-  };
-
   return (
-    <div>
-      <h5>Switch to Admin Mode</h5>
+    <>
       <form onSubmit={handleAdminLogin}>
         <input
           type="password"
@@ -40,9 +33,8 @@ const AdminLoginForm = () => {
           onChange={({ target }) => setAdminPin(target.value)}
         />
         <input type="submit" />
-        <button onClick={cancel}>Cancel</button>
       </form>
-    </div>
+    </>
   );
 };
 

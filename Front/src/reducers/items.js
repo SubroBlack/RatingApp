@@ -1,5 +1,6 @@
 import itemService from "../services/items";
 
+// Initializing Items
 export const initializeItems = () => {
   return async (dispatch) => {
     const items = await itemService.getAll();
@@ -10,6 +11,7 @@ export const initializeItems = () => {
   };
 };
 
+// Fetching a single Item
 export const getItem = (id) => {
   return async (dispatch) => {
     const item = await itemService.getItem(id);
@@ -20,6 +22,7 @@ export const getItem = (id) => {
   };
 };
 
+// Items Reducer
 const itemsReducer = (state = [], action) => {
   switch (action.type) {
     case "INIT_ITEMS":

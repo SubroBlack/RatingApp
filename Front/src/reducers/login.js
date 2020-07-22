@@ -30,11 +30,11 @@ export const signIn = (email, password) => {
 // User Logging Out
 export const logOut = () => {
   return async (dispatch) => {
+    await window.localStorage.removeItem("loggedRatingAppAdmin");
     await window.localStorage.removeItem("loggedRatingAppUser");
-    dispatch({
-      type: "CLEAR_USER",
-      user: null,
-    });
+    const user = helper.checkLogged();
+    await dispatch(setUser(user));
+    console.log("Login Reducer logOut: ", user);
   };
 };
 
@@ -42,6 +42,7 @@ export const logOut = () => {
 export const setLoggedUser = () => {
   return async (dispatch) => {
     const user = helper.checkLogged();
+    console.log("Login Reducer setLoggedUser: ", user);
     dispatch(setUser(user));
   };
 };
