@@ -11,9 +11,7 @@ const Items = () => {
 
   // Fetching data according the role of user signed in
   useEffect(() => {
-    console.log("Fetching Items: ");
     dispatch(initializeItems());
-    console.log("Items Fetched: ");
   }, [logged, dispatch]);
 
   // Main Items to be reviewed

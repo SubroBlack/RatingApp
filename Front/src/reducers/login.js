@@ -34,7 +34,6 @@ export const logOut = () => {
     await window.localStorage.removeItem("loggedRatingAppUser");
     const user = helper.checkLogged();
     await dispatch(setUser(user));
-    console.log("Login Reducer logOut: ", user);
   };
 };
 
@@ -42,7 +41,6 @@ export const logOut = () => {
 export const setLoggedUser = () => {
   return async (dispatch) => {
     const user = helper.checkLogged();
-    console.log("Login Reducer setLoggedUser: ", user);
     dispatch(setUser(user));
   };
 };

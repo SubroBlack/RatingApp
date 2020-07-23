@@ -14,9 +14,7 @@ const App = () => {
 
   // Setting up Logged In User
   useEffect(() => {
-    console.log("Setting Logged: ");
     dispatch(setLoggedUser());
-    console.log("Logged Set: ");
   }, [dispatch]);
 
   // Logged in User

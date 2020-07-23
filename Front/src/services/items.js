@@ -6,7 +6,6 @@ const baseUrl = "/api/items";
 const getAll = async () => {
   const config = helper.loggedUserConfig();
   const response = await axios.get(baseUrl, config);
-  console.log("Items Service getAll: ", response.data);
   return response.data;
 };
 
