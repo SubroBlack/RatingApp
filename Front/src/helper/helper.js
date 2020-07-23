@@ -23,6 +23,9 @@ const loggedUserToken = () => {
 
 const loggedUserConfig = () => {
   const token = loggedUserToken();
+  if (token === null) {
+    return null;
+  }
   const config = {
     headers: { auth: token },
   };

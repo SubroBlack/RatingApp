@@ -4,10 +4,14 @@ const jwt = require("jsonwebtoken");
 const Item = require("../models/item");
 
 // Fetching all the items in the DB by Admin
-itemsRouter.get("/", async (req, res) => {
+itemsRouter.get("/", async (req, res, next) => {
   const user = req.user;
   const role = req.role;
-  console.log(" Items Controller: Role: ", role);
+  let items = [];
+  if (!user) {
+    //return res.status(401).json({ error: "Token Missing or Invalid" });
+    return res.json(items.map((item) => item));
+  }
   items = await Item.find({ user: user._id });
   //mongoose.connection.close();
   if (role === "admin") {
@@ -18,7 +22,7 @@ itemsRouter.get("/", async (req, res) => {
 });
 
 // Posting new item to be reviewed
-itemsRouter.post("/", async (req, res) => {
+itemsRouter.post("/", async (req, res, next) => {
   const user = req.user;
   const role = req.role;
   if (role !== "admin") {

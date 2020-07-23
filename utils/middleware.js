@@ -4,6 +4,7 @@ const User = require("../models/user");
 // Token Extractor
 const tokenExtractor = async (req, res, next) => {
   const auth = req.get("auth");
+  console.log("Auth: ", auth);
   if (auth && auth.toLowerCase().startsWith("bearer ")) {
     const token = auth.substring(7);
     const decodedToken = jwt.verify(token, process.env.SECRET);
@@ -24,7 +25,7 @@ const unknownEndpoint = (req, res) => {
 
 // Error Handler function
 const errorHandler = (error, req, res, next) => {
-  console.error(error.message);
+  console.error("Error Handler: ", error.message);
 
   if (error.name === "CastError") {
     return res.status(400).send({ error: "malformatted id" });

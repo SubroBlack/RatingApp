@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
-import { initializeItems } from "./reducers/items";
 import { useDispatch, useSelector } from "react-redux";
 import Items from "./components/Items";
 import Item from "./components/Item";
@@ -23,13 +22,6 @@ const App = () => {
   // Logged in User
   const logged = useSelector((state) => state.logged);
   console.log("APP Logged: ", logged);
-
-  // Fetching data according the role of user signed in
-  useEffect(() => {
-    console.log("Fetching Items: ");
-    dispatch(initializeItems());
-    console.log("Items Fetched: ");
-  }, [logged, dispatch]);
 
   const gotoHome = () => {
     history.push("/");
