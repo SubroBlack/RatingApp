@@ -41,6 +41,12 @@ const Auth = () => {
     setForm(!form);
   };
 
+  // Goto Dashboard
+  const dashboard = (event) => {
+    event.preventDefault();
+    history.push("/dashboard");
+  };
+
   // Check if the user is signedin or admin mode is on
   const display = () => {
     if (!loggedUser) {
@@ -68,6 +74,7 @@ const Auth = () => {
         <div>
           <button onClick={switchToUser}>User Mode</button>
           <button onClick={signout}>Logout</button>
+          <button onClick={dashboard}>Dashboard</button>
         </div>
       );
     }

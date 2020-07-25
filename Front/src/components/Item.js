@@ -1,13 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useHistory } from "react-router";
 
-const Item = () => {
-  // Main Items to be reviewed
-  const items = useSelector((state) => state.items);
-  // Item to be shown
-  const itemId = useParams().id;
-  const item = items.find((item) => item.id === itemId);
+const Item = (props) => {
+  const history = useHistory();
+  const item = props.item;
+
+  const editItem = () => {
+    history.push(`/edit/${item.id}`);
+  };
 
   if (!item) {
     return null;
@@ -22,6 +22,7 @@ const Item = () => {
         <b>{item.name}</b>
         <h3>Category: {item.category}</h3>
         <p>{item.description}</p>
+        <button onClick={editItem}>Edit</button>
       </div>
     );
   };

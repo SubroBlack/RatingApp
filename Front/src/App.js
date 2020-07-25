@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Items from "./components/Items";
-import Item from "./components/Item";
 import "./App.css";
 import Auth from "./components/Auth";
 import { setLoggedUser } from "./reducers/login";
 import LoginForm from "./components/LoginForm";
+import AddItemForm from "./components/AddItemForm";
+import DashBoard from "./components/dashboard";
+import EditItemForm from "./components/EditItemForm";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,11 +32,17 @@ const App = () => {
       <h2 onClick={gotoHome}>Rating App</h2>
       <Auth />
       <Switch>
-        <Route path="/items/:id">
-          <Item />
+        <Route path="/addItem/">
+          <AddItemForm />
         </Route>
         <Route path="/login">
           <LoginForm />
+        </Route>
+        <Route path="/edit/:id">
+          <EditItemForm />
+        </Route>
+        <Route path="/dashboard">
+          <DashBoard />
         </Route>
         <Route path="/">
           <Items />

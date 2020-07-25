@@ -19,7 +19,7 @@ const AdminLoginForm = () => {
     dispatch(adminSignIn(adminPin));
     // Clearing the Login Form
     setAdminPin("");
-    history.push("/");
+    history.push("/dashboard");
   };
 
   return (

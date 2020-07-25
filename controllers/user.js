@@ -5,11 +5,13 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/user.js");
 
+// Getting a specific User data
 userRouter.get("/:id", async (req, res) => {
   const user = await User.findById(req.params.id);
   res.json(user.toJSON());
 });
 
+// Posting a new User
 userRouter.post("/", async (req, res) => {
   console.log("User router: ", req.body);
   if (req.body.password.length < 3) {

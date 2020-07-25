@@ -9,10 +9,26 @@ itemsRouter.get("/", async (req, res, next) => {
   const role = req.role;
   let items = [];
   if (!user) {
-    //return res.status(401).json({ error: "Token Missing or Invalid" });
     return res.json(items.map((item) => item));
   }
   items = await Item.find({ user: user._id });
+  //mongoose.connection.close();
+  if (role === "admin") {
+    res.json(items.map((item) => item.toJSON()));
+  } else if (role === "user") {
+    res.json(items.map((item) => item.toObject()));
+  }
+});
+
+// Fetching single item according to Id
+itemsRouter.get("/:id", async (req, res, next) => {
+  const user = req.user;
+  const role = req.role;
+  let items = [];
+  if (!user) {
+    return res.json(items.map((item) => item));
+  }
+  items = await Item.find({ user: user._id, _id: req.params.id });
   //mongoose.connection.close();
   if (role === "admin") {
     res.json(items.map((item) => item.toJSON()));
@@ -41,18 +57,35 @@ itemsRouter.post("/", async (req, res, next) => {
   res.status(201).json(result.toJSON());
 });
 
-//Rating an item
-itemsRouter.put("/:id", async (req, res, next) => {
+// Editing an Item
+itemsRouter.put("/:id", async (req, res) => {
   const user = req.user;
   const role = req.role;
+  const item = await Item.findById(req.params.id);
   if (role !== "admin") {
+    return res.status(401).json({ error: "Switch to Admin mode to edit Item" });
+  } else if (user._id.toString() !== item.user.toString()) {
+    return res.status(401).json({ error: "Unauthorized Action" });
+  }
+  const newItem = await Item.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
+
+  res.json(newItem.toJSON());
+});
+
+//Rating an item
+itemsRouter.put("/rate/:id", async (req, res, next) => {
+  const user = req.user;
+  const role = req.role;
+  if (role === "admin") {
     return res.status(401).json({ error: "Admin cannot leave review" });
   } else if (role !== "user") {
     return res.status(401).json({ error: "Sign In to leave a review" });
   }
   const review = {
-    comment: req.body.review.comment ? req.body.review.comment : null,
-    rate: Number(req.body.review.rate),
+    comment: req.body.comment ? req.body.comment : null,
+    rate: Number(req.body.rate),
   };
   console.log("Req body: ", req.body);
   const item = await Item.findById(req.params.id);
