@@ -47,12 +47,18 @@ const Auth = () => {
     history.push("/dashboard");
   };
 
+  // SignUP form
+  const signup = () => {
+    history.push("/join");
+  };
+
   // Check if the user is signedin or admin mode is on
   const display = () => {
     if (!loggedUser) {
       return (
         <div>
           <button onClick={loginFormButton}>SignIn</button>
+          <button onClick={signup}>Join</button>
         </div>
       );
     } else if (loggedUser.role === "user") {

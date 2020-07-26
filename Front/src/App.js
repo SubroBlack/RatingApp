@@ -9,6 +9,7 @@ import LoginForm from "./components/LoginForm";
 import AddItemForm from "./components/AddItemForm";
 import DashBoard from "./components/dashboard";
 import EditItemForm from "./components/EditItemForm";
+import JoinForm from "./components/JoinForm";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ const App = () => {
         </Route>
         <Route path="/login">
           <LoginForm />
+        </Route>
+        <Route path="/join">
+          <JoinForm />
         </Route>
         <Route path="/edit/:id">
           <EditItemForm />

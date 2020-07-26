@@ -2,9 +2,9 @@ import loginService from "../services/login";
 import helper from "../helper/helper";
 
 // setting a logged user in the store
-const setUser = (user) => {
+const setLogged = (user) => {
   return {
-    type: "SET_USER",
+    type: "SET_LOGGED",
     user: user,
   };
 };
@@ -20,7 +20,7 @@ export const signIn = (email, password) => {
         "loggedRatingAppUser",
         JSON.stringify(loggedUser)
       );
-      dispatch(setUser(loggedUser));
+      dispatch(setLogged(loggedUser));
     } catch (exception) {
       console.log(exception);
     }
@@ -33,7 +33,7 @@ export const logOut = () => {
     await window.localStorage.removeItem("loggedRatingAppAdmin");
     await window.localStorage.removeItem("loggedRatingAppUser");
     const user = helper.checkLogged();
-    await dispatch(setUser(user));
+    await dispatch(setLogged(user));
   };
 };
 
@@ -41,7 +41,7 @@ export const logOut = () => {
 export const setLoggedUser = () => {
   return async (dispatch) => {
     const user = helper.checkLogged();
-    dispatch(setUser(user));
+    dispatch(setLogged(user));
   };
 };
 
@@ -56,7 +56,7 @@ export const adminSignIn = (adminPin) => {
         "loggedRatingAppAdmin",
         JSON.stringify(loggedAdmin)
       );
-      dispatch(setUser(loggedAdmin));
+      dispatch(setLogged(loggedAdmin));
     } catch (exception) {
       console.log(exception);
     }
@@ -68,16 +68,16 @@ export const AdminLogOut = () => {
   return async (dispatch) => {
     await window.localStorage.removeItem("loggedRatingAppAdmin");
     const user = helper.checkLogged();
-    dispatch(setUser(user));
+    dispatch(setLogged(user));
   };
 };
 
 // Login Reducer
 const loginReducer = (state = null, action) => {
   switch (action.type) {
-    case "SET_USER":
+    case "SET_LOGGED":
       return action.user;
-    case "CLEAR_USER":
+    case "CLEAR_LOGGED":
       return action.user;
     default:
       return state;

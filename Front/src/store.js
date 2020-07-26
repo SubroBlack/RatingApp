@@ -5,10 +5,12 @@ import thunk from "redux-thunk";
 
 import itemsReducer from "./reducers/items";
 import loginReducer from "./reducers/login";
+import userReducer from "./reducers/user";
 
 const reducer = combineReducers({
   items: itemsReducer,
   logged: loginReducer,
+  user: userReducer,
 });
 
 const store = createStore(reducer, composeWithDevTools(applyMiddleware(thunk)));

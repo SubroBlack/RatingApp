@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/user.js");
 
 // Getting a specific User data
-userRouter.get("/:id", async (req, res) => {
+userRouter.get("/", async (req, res) => {
   const user = await User.findById(req.params.id);
   res.json(user.toJSON());
 });
@@ -18,7 +18,7 @@ userRouter.post("/", async (req, res) => {
     return res
       .status(400)
       .json({ error: "Password must at least 3 character long" });
-  } else if (!req.body.adminPin.length === 4) {
+  } else if (req.body.adminPin.length !== 4) {
     console.log(
       "AdminPin",
       req.body.adminPin,
@@ -39,6 +39,7 @@ userRouter.post("/", async (req, res) => {
   });
 
   const savedUser = await user.save();
+  console.log("User Controller, New User saved : ", savedUser);
   res.status(201).json(savedUser.toJSON());
 });
 
