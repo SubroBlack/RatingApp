@@ -1,12 +1,24 @@
 import React from "react";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { deleteItem } from "../reducers/items";
 
 const Item = (props) => {
+  // Dispatch
+  const dispatch = useDispatch();
+
   const history = useHistory();
   const item = props.item;
 
+  // GOto Edit Item form
   const editItem = () => {
     history.push(`/edit/${item.id}`);
+  };
+
+  // Delete the current Item
+  const removeItem = async () => {
+    await dispatch(deleteItem(item));
+    props.clear("");
   };
 
   if (!item) {
@@ -23,6 +35,7 @@ const Item = (props) => {
         <h3>Category: {item.category}</h3>
         <p>{item.description}</p>
         <button onClick={editItem}>Edit</button>
+        <button onClick={removeItem}>Delete</button>
       </div>
     );
   };

@@ -35,7 +35,7 @@ const Items = () => {
     if (singleItem) {
       return (
         <>
-          <Item item={singleItem} />
+          <Item item={singleItem} clear={setSingleItem} />
           <button
             onClick={() => {
               openItem(null);

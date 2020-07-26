@@ -54,4 +54,16 @@ const rateItem = async (id, rating) => {
   return response.data;
 };
 
-export default { getAll, getItem, addItem, editItem, rateItem };
+// Deleting an item
+const removeItem = async (id) => {
+  const user = helper.checkLogged();
+  if (user.role !== "admin") {
+    console.log("WOOPsss, it got caught: ", user.role);
+    throw new Error("Only Admin can Delete Items");
+  }
+  const config = helper.loggedUserConfig();
+  const res = await axios.delete(`${baseUrl}/${id}`, config);
+  return res;
+};
+
+export default { getAll, getItem, addItem, editItem, rateItem, removeItem };

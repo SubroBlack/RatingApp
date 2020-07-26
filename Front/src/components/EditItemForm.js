@@ -23,7 +23,7 @@ const EditItemForm = () => {
     dispatch(getItem(itemId));
   }, [dispatch, itemId, logged]);
 
-  // THe item
+  // The item
   const item = useSelector((state) => state.items)[0];
 
   if (!logged) {

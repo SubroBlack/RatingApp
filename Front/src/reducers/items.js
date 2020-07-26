@@ -56,6 +56,17 @@ export const rateItem = (id, rating) => {
   };
 };
 
+// Deleting the item
+export const deleteItem = (item) => {
+  return async (dispatch) => {
+    await itemService.removeItem(item.id);
+    dispatch({
+      type: "DELETE",
+      data: item,
+    });
+  };
+};
+
 // Items Reducer
 const itemsReducer = (state = [], action) => {
   switch (action.type) {
@@ -68,7 +79,8 @@ const itemsReducer = (state = [], action) => {
     case "EDITED":
       const other = state.filter((item) => item.id !== action.data.id);
       return other.concat(action.data);
-
+    case "DELETE":
+      return state.filter((obj) => obj.id !== action.data.id);
     default:
       return state;
   }
