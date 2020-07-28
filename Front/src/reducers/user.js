@@ -4,7 +4,6 @@ import userService from "../services/user";
 export const getUser = () => {
   return async (dispatch) => {
     const user = await userService.getUser();
-    console.log("Single User fetched: ", user);
     dispatch({
       type: "SET_USER",
       data: user,
@@ -37,7 +36,7 @@ export const editUser = (user) => {
 // Deleting the item
 export const deleteUser = (user) => {
   return async (dispatch) => {
-    //await userService.removeItem(user.id);
+    await userService.deleteUser();
     dispatch({
       type: "DELETE",
       data: user,
@@ -51,7 +50,7 @@ const userReducer = (state = [], action) => {
     case "SET_USER":
       return action.data;
     case "DELETE":
-      return state.filter((obj) => obj.id !== action.data.id);
+      return null;
     default:
       return state;
   }

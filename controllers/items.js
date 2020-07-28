@@ -1,6 +1,5 @@
 const itemsRouter = require("express").Router();
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 const Item = require("../models/item");
 
 // Fetching all the items in the DB by Admin
@@ -87,9 +86,7 @@ itemsRouter.put("/rate/:id", async (req, res, next) => {
     comment: req.body.comment ? req.body.comment : null,
     rate: Number(req.body.rate),
   };
-  console.log("Req body: ", req.body);
   const item = await Item.findById(req.params.id);
-  console.log("ITEM :", item.review);
   const newReviews = item.review.concat(review);
   item.review = newReviews;
   console.log("New ITEM :", item.review);

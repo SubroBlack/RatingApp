@@ -15,14 +15,22 @@ const newUser = async (user) => {
 
 // Fetching a User
 const getUser = async () => {
-  const logged = helper.checkLogged();
-  if (logged.role !== "admin") {
-    console.log("WOOPsss, it got caught");
-    throw new Error("UnAuthorized Action");
-  }
   const config = helper.loggedUserConfig();
   const response = await axios.get(baseUrl, config);
   return response.data;
 };
 
-export default { newUser, getUser };
+// Deleting a User
+const deleteUser = async () => {
+  const logged = helper.checkLogged();
+  if (logged.role !== "admin") {
+    console.log("WOOPsss, it got caught", logged.role);
+    throw new Error("UnAuthorized Action");
+  }
+  const config = helper.loggedUserConfig();
+  const response = await axios.delete(baseUrl, config);
+  console.log("User Deleted", response.data);
+  return response.data;
+};
+
+export default { newUser, getUser, deleteUser };
