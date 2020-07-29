@@ -20,6 +20,13 @@ const getUser = async () => {
   return response.data;
 };
 
+// Editing a User
+const editUser = async (editUser) => {
+  const config = helper.loggedUserConfig();
+  const response = await axios.post(`${baseUrl}/edit`, editUser, config);
+  return response.data;
+};
+
 // Deleting a User
 const deleteUser = async () => {
   const logged = helper.checkLogged();
@@ -33,4 +40,4 @@ const deleteUser = async () => {
   return response.data;
 };
 
-export default { newUser, getUser, deleteUser };
+export default { newUser, getUser, editUser, deleteUser };

@@ -28,6 +28,12 @@ const DashBoard = () => {
     history.push("/addItem");
   };
 
+  // EditUserForm
+  const editUser = (event) => {
+    event.preventDefault();
+    history.push("/editUser");
+  };
+
   // Remove the account
   const removeUser = (event) => {
     event.preventDefault();
@@ -40,6 +46,7 @@ const DashBoard = () => {
     <>
       <h5>DashBoard</h5>
       <button onClick={addItemForm}>Add an Item</button>
+      <button onClick={editUser}>Settings</button>
       <button onClick={removeUser}>Remove Your Account</button>
     </>
   );

@@ -7,9 +7,10 @@ import Auth from "./components/Auth";
 import { setLoggedUser } from "./reducers/login";
 import LoginForm from "./components/LoginForm";
 import AddItemForm from "./components/AddItemForm";
-import DashBoard from "./components/dashboard";
+import DashBoard from "./components/Dashboard";
 import EditItemForm from "./components/EditItemForm";
 import JoinForm from "./components/JoinForm";
+import EditUserForm from "./components/EditUserForm";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,9 @@ const App = () => {
         </Route>
         <Route path="/dashboard">
           <DashBoard />
+        </Route>
+        <Route path="/editUser">
+          <EditUserForm />
         </Route>
         <Route path="/">
           <Items />
