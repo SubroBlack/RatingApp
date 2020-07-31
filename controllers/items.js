@@ -1,6 +1,7 @@
 const itemsRouter = require("express").Router();
 const mongoose = require("mongoose");
 const Item = require("../models/item");
+const User = require("../models/user");
 
 // Fetching all the items in the DB by Admin
 itemsRouter.get("/", async (req, res, next) => {
@@ -52,6 +53,8 @@ itemsRouter.post("/", async (req, res, next) => {
   });
   const result = await newItem.save();
   console.log("New Item", result);
+  user.items = user.items.concat(result._id);
+  await user.save();
   //mongoose.connection.close();
   res.status(201).json(result.toJSON());
 });
@@ -100,12 +103,14 @@ itemsRouter.delete("/:id", async (req, res) => {
   const role = req.role;
   const item = await Item.findById(req.params.id);
   if (role !== "admin") {
-    return res.status(401).json({ error: "Switch to Admin mode to edit Item" });
+    return res.status(401).json({ error: "Unauthorized Action" });
   } else if (user._id.toString() !== item.user.toString()) {
     return res.status(401).json({ error: "Unauthorized Action" });
   }
   await Item.findByIdAndDelete(req.params.id);
   console.log("Item deleted");
+  user.items = user.items.filter((a) => a.toString() !== req.params.id);
+  await user.save();
   res.status(204).end();
 });
 

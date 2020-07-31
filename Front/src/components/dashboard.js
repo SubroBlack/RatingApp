@@ -44,7 +44,7 @@ const DashBoard = () => {
 
   return (
     <>
-      <h5>DashBoard</h5>
+      <h5>{user.name}'s DashBoard</h5>
       <button onClick={addItemForm}>Add an Item</button>
       <button onClick={editUser}>Settings</button>
       <button onClick={removeUser}>Remove Your Account</button>
