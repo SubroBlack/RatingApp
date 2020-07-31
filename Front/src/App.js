@@ -11,6 +11,7 @@ import DashBoard from "./components/Dashboard";
 import EditItemForm from "./components/EditItemForm";
 import JoinForm from "./components/JoinForm";
 import EditUserForm from "./components/EditUserForm";
+import Notification from "./components/Notification";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -32,6 +33,7 @@ const App = () => {
   return (
     <div className="App">
       <h2 onClick={gotoHome}>Rating App</h2>
+      <Notification />
       <Auth />
       <Switch>
         <Route path="/addItem/">

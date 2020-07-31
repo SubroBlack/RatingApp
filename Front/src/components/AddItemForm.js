@@ -28,7 +28,7 @@ const AddItemForm = () => {
   const submit = async (event) => {
     event.preventDefault();
     await dispatch(addItem({ name, category, description }));
-    // Clearing the Login Form
+    // Clearing the Form
     setName("");
     setCategory("");
     setDescription("");

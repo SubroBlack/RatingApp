@@ -1,5 +1,6 @@
 import loginService from "../services/login";
 import helper from "../helper/helper";
+import { notify } from "./notification";
 
 // setting a logged user in the store
 const setLogged = (user) => {
@@ -20,7 +21,8 @@ export const signIn = (email, password) => {
         "loggedRatingAppUser",
         JSON.stringify(loggedUser)
       );
-      dispatch(setLogged(loggedUser));
+      await dispatch(setLogged(loggedUser));
+      await dispatch(notify({ data: `Welcome` }, 5));
     } catch (exception) {
       console.log(exception);
     }
@@ -30,10 +32,11 @@ export const signIn = (email, password) => {
 // User Logging Out
 export const logOut = () => {
   return async (dispatch) => {
-    await window.localStorage.removeItem("loggedRatingAppAdmin");
-    await window.localStorage.removeItem("loggedRatingAppUser");
-    const user = helper.checkLogged();
+    window.localStorage.removeItem("loggedRatingAppAdmin");
+    window.localStorage.removeItem("loggedRatingAppUser");
+    const user = await helper.checkLogged();
     await dispatch(setLogged(user));
+    await dispatch(notify({ data: "See Ya!" }, 5));
   };
 };
 
@@ -41,7 +44,7 @@ export const logOut = () => {
 export const setLoggedUser = () => {
   return async (dispatch) => {
     const user = helper.checkLogged();
-    dispatch(setLogged(user));
+    await dispatch(setLogged(user));
   };
 };
 
@@ -56,7 +59,8 @@ export const adminSignIn = (adminPin) => {
         "loggedRatingAppAdmin",
         JSON.stringify(loggedAdmin)
       );
-      dispatch(setLogged(loggedAdmin));
+      await dispatch(notify({ data: `Admin mode` }, 5));
+      await dispatch(setLogged(loggedAdmin));
     } catch (exception) {
       console.log(exception);
     }
@@ -66,9 +70,10 @@ export const adminSignIn = (adminPin) => {
 // Admin Logging Out
 export const AdminLogOut = () => {
   return async (dispatch) => {
-    await window.localStorage.removeItem("loggedRatingAppAdmin");
-    const user = helper.checkLogged();
-    dispatch(setLogged(user));
+    window.localStorage.removeItem("loggedRatingAppAdmin");
+    const user = await helper.checkLogged();
+    await dispatch(notify({ data: `User mode` }, 5));
+    await dispatch(setLogged(user));
   };
 };
 

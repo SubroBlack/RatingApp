@@ -1,4 +1,5 @@
 import userService from "../services/user";
+import { notify } from "./notification";
 
 // Fetching a single Item
 export const getUser = () => {
@@ -19,6 +20,7 @@ export const addUser = (user) => {
       type: "SET_USER",
       data: newUser,
     });
+    dispatch(notify({ data: `Welcome ${newUser.name}` }, 5));
   };
 };
 
@@ -30,6 +32,7 @@ export const editUser = (user) => {
       type: "SET_USER",
       data: editedUser,
     });
+    dispatch(notify({ data: `${editedUser.name} updated` }, 3));
   };
 };
 
@@ -41,6 +44,7 @@ export const deleteUser = (user) => {
       type: "DELETE",
       data: user,
     });
+    dispatch(notify({ data: `CIAO ${user.name}` }, 3));
   };
 };
 

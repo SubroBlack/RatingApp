@@ -1,4 +1,5 @@
 import itemService from "../services/items";
+import { notify } from "./notification";
 
 // Initializing Items
 export const allItems = () => {
@@ -31,6 +32,7 @@ export const addItem = (item) => {
       type: "NEW",
       data: newItem,
     });
+    dispatch(notify({ data: `${newItem.name} added to collection` }, 3));
   };
 };
 
@@ -42,6 +44,7 @@ export const editItem = (id, item) => {
       type: "EDITED",
       data: editedItem,
     });
+    dispatch(notify({ data: `${editedItem.name} updated in collection` }, 3));
   };
 };
 
@@ -53,6 +56,7 @@ export const rateItem = (id, rating) => {
       type: "EDITED",
       data: ratedItem,
     });
+    dispatch(notify({ data: `Thank You for your feedback` }, 1.5));
   };
 };
 
@@ -64,6 +68,7 @@ export const deleteItem = (item) => {
       type: "DELETE",
       data: item,
     });
+    dispatch(notify({ data: `${item.name} removed from collection` }, 3));
   };
 };
 
