@@ -12,7 +12,6 @@ import EditItemForm from "./components/EditItemForm";
 import JoinForm from "./components/JoinForm";
 import EditUserForm from "./components/EditUserForm";
 import Notification from "./components/Notification";
-
 const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();

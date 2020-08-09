@@ -30,9 +30,10 @@ const Item = (props) => {
   const show = () => {
     return (
       <div key={item.id}>
-        <h3>Details</h3>
+        <h4>Details</h4>
         <b>{item.name}</b>
-        <h3>Category: {item.category}</h3>
+        <h5>Category: {item.category}</h5>
+        <b>{item.posted.getDate()}</b>
         <p>{item.description}</p>
         <button onClick={editItem}>Edit</button>
         <button onClick={removeItem}>Delete</button>

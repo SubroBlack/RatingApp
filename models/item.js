@@ -9,6 +9,10 @@ const itemSchema = mongoose.Schema({
     type: String,
     require: true,
   },
+  posted: {
+    type: Date,
+    require: true,
+  },
   description: {
     type: String,
     required: false,
@@ -17,6 +21,7 @@ const itemSchema = mongoose.Schema({
     {
       comment: { type: String, required: false },
       rate: { type: Number, min: 1, max: 5, required: true },
+      posted: { type: Date, require: true },
     },
   ],
   user: {

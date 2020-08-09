@@ -25,9 +25,14 @@ mongoose
     useUnifiedTopology: true,
     useFindAndModify: false,
   })
-  .then(() => {
-    console.log("Connected to MongoDB");
-  });
+  .then(
+    () => {
+      console.log("Connected to MongoDB");
+    },
+    (err) => {
+      console.log("Connection to Database Failed: ", err);
+    }
+  );
 // CORS to allow Cross Origin Resource Sharing
 app.use(cors());
 // Body parser to parse the post objects

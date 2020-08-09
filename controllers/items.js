@@ -47,6 +47,7 @@ itemsRouter.post("/", async (req, res, next) => {
   const newItem = new Item({
     name: req.body.name,
     category: req.body.category,
+    posted: new Date(Date.now()),
     description: req.body.description ? req.body.description : null,
     review: [],
     user: user._id,
@@ -88,6 +89,7 @@ itemsRouter.put("/rate/:id", async (req, res, next) => {
   const review = {
     comment: req.body.comment ? req.body.comment : null,
     rate: Number(req.body.rate),
+    posted: new Date(Date.now()),
   };
   const item = await Item.findById(req.params.id);
   const newReviews = item.review.concat(review);
