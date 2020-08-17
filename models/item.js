@@ -9,6 +9,14 @@ const itemSchema = mongoose.Schema({
     type: String,
     require: true,
   },
+  filename: {
+    required: true,
+    type: String,
+  },
+  fileId: {
+    required: true,
+    type: String,
+  },
   posted: {
     type: Date,
     require: true,

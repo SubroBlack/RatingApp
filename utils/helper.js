@@ -3,7 +3,13 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const Item = require("../models/item");
 const User = require("../models/user");
+const config = require("./config");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const crypto = require("crypto");
+const path = require("path");
 
+/*
 // Checking if the logged User is Admin or User
 const signedRole = async (req, res) => {
   const user = await signedUser(req, res);
@@ -29,10 +35,34 @@ const signedUser = async (req, res) => {
   console.log("User: ", user);
   return user;
 };
+*/
 
 /*
-module.exports = {
-  signedUser,
-  signedRole,
-};
+  GridFs Configuration
 */
+// create storage engine
+const storage = new GridFsStorage({
+  url: config.MONGODB_URI,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString("hex") + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          user: req.user,
+          bucketName: "uploads",
+        };
+        resolve(fileInfo);
+      });
+    });
+  },
+});
+
+const upload = multer({ storage });
+
+module.exports = {
+  upload,
+};

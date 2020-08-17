@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const itemsRouter = require("./controllers/items");
 
 const config = require("./utils/config");
+const { upload } = require("./utils/helper");
 const { unknownEndpoint, errorHandler } = require("./utils/middleware");
 const userRouter = require("./controllers/user");
 const loginRouter = require("./controllers/login");
@@ -45,7 +46,7 @@ app.get("/", (req, res) => {
 app.use(middleware.tokenExtractor);
 app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
-app.use("/api/items/", itemsRouter);
+app.use("/api/items/", itemsRouter(upload));
 
 // Middlewares
 app.use(unknownEndpoint);

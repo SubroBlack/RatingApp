@@ -66,4 +66,11 @@ const removeItem = async (id) => {
   return res;
 };
 
-export default { getAll, getItem, addItem, editItem, rateItem, removeItem };
+export default {
+  getAll,
+  getItem,
+  addItem,
+  editItem,
+  rateItem,
+  removeItem,
+};

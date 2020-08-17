@@ -21,6 +21,17 @@ module.exports = (upload) => {
     });
   });
 
+  // Get all the files
+  const getFiles = async () => {
+    const files = await gfs.find().toArray();
+    return files;
+  };
+
+  // Matching the item with image
+  const getImage = (files, item) => {
+    return files.filter((file) => file._id.toString() === item.fileId)[0];
+  };
+
   // Fetching all the items in the DB by Admin
   itemsRouter.get("/", async (req, res, next) => {
     const user = req.user;
@@ -30,11 +41,23 @@ module.exports = (upload) => {
       return res.json(items.map((item) => item));
     }
     items = await Item.find({ user: user._id });
+    // Finding the image for the item
+    const files = await getFiles();
     //mongoose.connection.close();
     if (role === "admin") {
-      res.json(items.map((item) => item.toJSON()));
+      res.json(
+        items.map((item) => ({
+          info: item.toJSON(),
+          image: getImage(files, item),
+        }))
+      );
     } else if (role === "user") {
-      res.json(items.map((item) => item.toObject()));
+      res.json(
+        items.map((item) => ({
+          info: item.toObject(),
+          image: getImage(files, item),
+        }))
+      );
     }
   });
 
@@ -47,11 +70,23 @@ module.exports = (upload) => {
       return res.json(items.map((item) => item));
     }
     items = await Item.find({ user: user._id, _id: req.params.id });
+    // Finding the image for the item
+    const files = await getFiles();
     //mongoose.connection.close();
     if (role === "admin") {
-      res.json(items.map((item) => item.toJSON()));
+      res.json(
+        items.map((item) => ({
+          info: item.toJSON(),
+          image: getImage(files, item),
+        }))
+      );
     } else if (role === "user") {
-      res.json(items.map((item) => item.toObject()));
+      res.json(
+        items.map((item) => ({
+          info: item.toObject(),
+          image: getImage(files, item),
+        }))
+      );
     }
   });
 
@@ -78,39 +113,6 @@ module.exports = (upload) => {
     await user.save();
     //mongoose.connection.close();
     res.status(201).json(result.toJSON());
-  });
-
-  /* 
-    GET: Fetches a particular image and render on browser
-  */
-  itemsRouter.get("/image/:filename", async (req, res, next) => {
-    gfs.find({ filename: req.params.filename }).toArray((err, files) => {
-      console.log(
-        "File found: ",
-        files[0],
-        "File Searched: ",
-        req.params.filename
-      );
-      if (!files[0] || files.length === 0) {
-        return res.status(200).json({
-          success: false,
-          message: "No files available",
-        });
-      }
-
-      if (
-        files[0].contentType === "image/jpeg" ||
-        files[0].contentType === "image/png" ||
-        files[0].contentType === "image/svg+xml"
-      ) {
-        // render image to browser
-        gfs.openDownloadStreamByName(req.params.filename).pipe(res);
-      } else {
-        res.status(404).json({
-          err: "Not an image",
-        });
-      }
-    });
   });
 
   // Editing an Item

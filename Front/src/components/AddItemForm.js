@@ -8,6 +8,8 @@ const AddItemForm = () => {
   const [name, setName] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [uploadedImage, setUploadedImage] = useState({});
 
   // useDispatch hook to dispatch the Action
   const dispatch = useDispatch();
@@ -27,11 +29,19 @@ const AddItemForm = () => {
   // Submit the Add Item Form
   const submit = async (event) => {
     event.preventDefault();
-    await dispatch(addItem({ name, category, description }));
+    let formData = new FormData();
+    formData.append("name", name);
+    formData.append("category", category);
+    formData.append("description", description);
+    formData.append("file", uploadedImage);
+    //await dispatch(addItem({ name, category, description }));
+    await dispatch(addItem(formData));
     // Clearing the Form
     setName("");
     setCategory("");
     setDescription("");
+    setUploadedImage({});
+    setUploadedImageUrl("");
     history.push("/");
   };
 
@@ -67,6 +77,20 @@ const AddItemForm = () => {
           placeholder="Description"
           value={description}
           onChange={({ target }) => setDescription(target.value)}
+        />
+        <br />
+        <input
+          type="file"
+          name="image"
+          onChange={(event) => {
+            setUploadedImageUrl(URL.createObjectURL(event.target.files[0]));
+            setUploadedImage(event.target.files[0]);
+          }}
+        />
+        <br />
+        <img
+          src={!uploadedImageUrl.trim() ? null : uploadedImageUrl}
+          alt="upload"
         />
         <br />
         <input type="submit" />

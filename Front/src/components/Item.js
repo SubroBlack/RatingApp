@@ -17,7 +17,7 @@ const Item = (props) => {
 
   // Delete the current Item
   const removeItem = async () => {
-    await dispatch(deleteItem(item));
+    dispatch(deleteItem(item));
     props.clear("");
   };
 
@@ -33,7 +33,7 @@ const Item = (props) => {
         <h4>Details</h4>
         <b>{item.name}</b>
         <h5>Category: {item.category}</h5>
-        <b>{item.posted.getDate()}</b>
+        <b>{item.posted}</b>
         <p>{item.description}</p>
         <button onClick={editItem}>Edit</button>
         <button onClick={removeItem}>Delete</button>
