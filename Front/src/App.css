@@ -28,6 +28,13 @@
   color: #61dafb;
 }
 
+/* Style for images */
+.galleryImage {
+  display: block;
+  max-height: 350px;
+  max-width: auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

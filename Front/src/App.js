@@ -12,6 +12,10 @@ import EditItemForm from "./components/EditItemForm";
 import JoinForm from "./components/JoinForm";
 import EditUserForm from "./components/EditUserForm";
 import Notification from "./components/Notification";
+
+// Material UI
+import { Container } from "@material-ui/core";
+
 const App = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,34 +34,36 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <h2 onClick={gotoHome}>Rating App</h2>
-      <Notification />
-      <Auth />
-      <Switch>
-        <Route path="/addItem/">
-          <AddItemForm />
-        </Route>
-        <Route path="/login">
-          <LoginForm />
-        </Route>
-        <Route path="/join">
-          <JoinForm />
-        </Route>
-        <Route path="/edit/:id">
-          <EditItemForm />
-        </Route>
-        <Route path="/dashboard">
-          <DashBoard />
-        </Route>
-        <Route path="/editUser">
-          <EditUserForm />
-        </Route>
-        <Route path="/">
-          <Items />
-        </Route>
-      </Switch>
-    </div>
+    <Container>
+      <div className="App">
+        <h2 onClick={gotoHome}>Rating App</h2>
+        <Notification />
+        <Auth />
+        <Switch>
+          <Route path="/addItem/">
+            <AddItemForm />
+          </Route>
+          <Route path="/login">
+            <LoginForm />
+          </Route>
+          <Route path="/join">
+            <JoinForm />
+          </Route>
+          <Route path="/edit/:id">
+            <EditItemForm />
+          </Route>
+          <Route path="/dashboard">
+            <DashBoard />
+          </Route>
+          <Route path="/editUser">
+            <EditUserForm />
+          </Route>
+          <Route path="/">
+            <Items />
+          </Route>
+        </Switch>
+      </div>
+    </Container>
   );
 };
 

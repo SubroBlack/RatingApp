@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { allItems } from "../reducers/items";
 import Item from "./Item";
+import Carousel from "react-material-ui-carousel";
+import { paper } from "@material-ui/core";
 const imgUrl = "/api/items/image/";
 
 const Items = () => {
@@ -47,15 +49,25 @@ const Items = () => {
         </>
       );
     } else {
-      return items.map((item) => (
-        <div key={item.id}>
-          <h3 onClick={() => openItem(item)}> {item.name}</h3>
-          <img src={imgUrl + item.filename} alt={item.name} />
-          <br />
-          <b>{item.category}</b>
-          <p>{item.review ? "Reviews stack returned " : "No Review Array"}</p>
-        </div>
-      ));
+      return (
+        <Carousel>
+          {items.map((item) => (
+            <div key={item.id}>
+              <h3 onClick={() => openItem(item)}> {item.name}</h3>
+              <img
+                className="galleryImage"
+                src={imgUrl + item.filename}
+                alt={item.name}
+              />
+              <br />
+              <b>{item.category}</b>
+              <p>
+                {item.review ? "Reviews stack returned " : "No Review Array"}
+              </p>
+            </div>
+          ))}
+        </Carousel>
+      );
     }
   };
 
