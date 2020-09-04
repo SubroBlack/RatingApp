@@ -33,20 +33,9 @@ const Items = () => {
       return null;
     }
     if (singleItem) {
-      return (
-        <>
-          <Item item={singleItem} clear={setSingleItem} />
-          <button
-            onClick={() => {
-              openItem(null);
-            }}
-          >
-            Cancel
-          </button>
-        </>
-      );
+      return <Item item={singleItem} clear={setSingleItem} />;
     }
-    return <Carousel items={items} />;
+    return <Carousel items={items} open={openItem} />;
   };
 
   return <div>{show()}</div>;

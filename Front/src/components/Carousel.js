@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Paper, Typography, Button, MobileStepper } from "@material-ui/core";
+import { Button, MobileStepper } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons/";
 import SwipeableViews from "react-swipeable-views";
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Carousel = ({ items }) => {
+const Carousel = ({ items, open }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
@@ -53,7 +53,12 @@ const Carousel = ({ items }) => {
   return (
     <div className={classes.root}>
       <div className={classes.header}>
-        <b className={classes.carouselText}>{items[activeStep].name}</b>
+        <div
+          className={classes.carouselText}
+          onClick={() => open(items[activeStep])}
+        >
+          {items[activeStep].name}
+        </div>
       </div>
 
       <AutoPlaySwipeableViews
