@@ -85,12 +85,6 @@ module.exports = (upload) => {
   */
   itemsRouter.get("/image/:filename", async (req, res, next) => {
     gfs.find({ filename: req.params.filename }).toArray((err, files) => {
-      console.log(
-        "File found: ",
-        files[0],
-        "File Searched: ",
-        req.params.filename
-      );
       if (!files[0] || files.length === 0) {
         return res.status(200).json({
           success: false,
