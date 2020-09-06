@@ -12,6 +12,7 @@ import EditItemForm from "./components/EditItemForm";
 import JoinForm from "./components/JoinForm";
 import EditUserForm from "./components/EditUserForm";
 import Notification from "./components/Notification";
+import AppMenu from "./components/AppMenu";
 
 // Material UI
 import { Container } from "@material-ui/core";
@@ -34,11 +35,10 @@ const App = () => {
   };
 
   return (
-    <Container>
-      <div className="App">
-        <h2 onClick={gotoHome}>Rating App</h2>
+    <div className="App">
+      <AppMenu />
+      <Container maxWidth={false} className="Content">
         <Notification />
-        <Auth />
         <Switch>
           <Route path="/addItem/">
             <AddItemForm />
@@ -62,8 +62,8 @@ const App = () => {
             <Items />
           </Route>
         </Switch>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

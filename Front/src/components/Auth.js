@@ -4,6 +4,8 @@ import { logOut, AdminLogOut } from "../reducers/login.js";
 import { useDispatch, useSelector } from "react-redux";
 import AdminLoginForm from "./AdminLoginForm";
 
+import { Button } from "@material-ui/core";
+
 const Auth = () => {
   // Using History to redirect
   const history = useHistory();
@@ -56,10 +58,14 @@ const Auth = () => {
   const display = () => {
     if (!loggedUser) {
       return (
-        <div>
-          <button onClick={loginFormButton}>SignIn</button>
-          <button onClick={signup}>Join</button>
-        </div>
+        <>
+          <Button size="small" onClick={loginFormButton} color="inherit">
+            Login
+          </Button>
+          <Button color="inherit" size="small" onClick={signup}>
+            Join
+          </Button>
+        </>
       );
     } else if (loggedUser.role === "user") {
       return (
@@ -67,20 +73,32 @@ const Auth = () => {
           {form ? (
             <>
               <AdminLoginForm />
-              <button onClick={toggleAdminForm}>Cancel</button>
+              <Button color="inherit" size="small" onClick={toggleAdminForm}>
+                Cancel
+              </Button>
             </>
           ) : (
-            <button onClick={toggleAdminForm}>Switch to Admin</button>
+            <Button color="inherit" size="small" onClick={toggleAdminForm}>
+              Switch to Admin
+            </Button>
           )}
-          <button onClick={signout}>Logout</button>
+          <Button color="inherit" size="small" onClick={signout}>
+            Logout
+          </Button>
         </div>
       );
     } else if (loggedUser.role === "admin") {
       return (
         <div>
-          <button onClick={switchToUser}>User Mode</button>
-          <button onClick={signout}>Logout</button>
-          <button onClick={dashboard}>Dashboard</button>
+          <Button color="inherit" size="small" onClick={switchToUser}>
+            User Mode
+          </Button>
+          <Button color="inherit" size="small" onClick={signout}>
+            Logout
+          </Button>
+          <Button color="inherit" size="small" onClick={dashboard}>
+            Dashboard
+          </Button>
         </div>
       );
     }

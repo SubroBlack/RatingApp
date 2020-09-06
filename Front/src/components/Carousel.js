@@ -9,20 +9,23 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    width: "100%",
     flexGrow: 1,
   },
   header: {
-    padding: "auto",
+    paddingLeft: "3vw",
   },
   imgContainer: {
-    width: "100%",
+    width: "90vw",
+    paddingTop: "0.5vmin",
   },
   img: {
     display: "flex",
     margin: "auto",
-    height: "65vh",
-    overflow: "hidden",
+    height: "70vh",
     width: "auto",
+    maxWidth: "90vw",
+    overflow: "hidden",
   },
   carouselText: {
     margin: "auto",
@@ -52,15 +55,6 @@ const Carousel = ({ items, open }) => {
 
   return (
     <div className={classes.root}>
-      <div className={classes.header}>
-        <div
-          className={classes.carouselText}
-          onClick={() => open(items[activeStep])}
-        >
-          {items[activeStep].name}
-        </div>
-      </div>
-
       <AutoPlaySwipeableViews
         axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
@@ -79,6 +73,14 @@ const Carousel = ({ items, open }) => {
           </div>
         ))}
       </AutoPlaySwipeableViews>
+      <div className={classes.header}>
+        <div
+          className={classes.carouselText}
+          onClick={() => open(items[activeStep])}
+        >
+          {items[activeStep].name}
+        </div>
+      </div>
       <MobileStepper
         steps={maxSteps}
         position="static"

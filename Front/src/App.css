@@ -1,9 +1,9 @@
 .App {
-  padding-left: 2%;
+  margin: 0;
+  width: 100vw;
 }
 
 .App-logo {
-  height: 40vmin;
   pointer-events: none;
 }
 
@@ -13,33 +13,13 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
 
-/* Style for image Container */
-.galleryImage {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Style for images */
-.galleryImage {
-  display: flex;
-  width: 100%;
-  height: 100%;
+.Content {
+  background-color: seashell;
+  padding-left: 2vw;
 }
 
 @keyframes App-logo-spin {
