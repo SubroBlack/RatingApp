@@ -4,6 +4,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons/";
 import SwipeableViews from "react-swipeable-views";
 import { autoPlay } from "react-swipeable-views-utils";
+import Review from "./Review";
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -80,6 +81,7 @@ const Carousel = ({ items, open }) => {
         >
           {items[activeStep].name}
         </div>
+        <Review item={items[activeStep]} />
       </div>
       <MobileStepper
         steps={maxSteps}

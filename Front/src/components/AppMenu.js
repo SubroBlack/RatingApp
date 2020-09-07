@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
   Toolbar,
-  Button,
   IconButton,
   Typography,
   ClickAwayListener,
@@ -52,7 +51,6 @@ const AppMenu = () => {
   };
 
   const handleClickAway = () => {
-    console.log("Close the Menu: ", open);
     setOpen(false);
   };
 
@@ -60,12 +58,6 @@ const AppMenu = () => {
   const gotoHome = () => {
     history.push("/");
   };
-
-  /*
-    <Button type="button" color="inherit" onClick={handleClick}>
-          Menu
-        </Button>
-  */
 
   return (
     <ClickAwayListener onClickAway={handleClickAway}>

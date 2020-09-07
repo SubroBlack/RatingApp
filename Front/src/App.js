@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import Items from "./components/Items";
+import Home from "./components/Home";
 import "./App.css";
-import Auth from "./components/Auth";
 import { setLoggedUser } from "./reducers/login";
 import LoginForm from "./components/LoginForm";
 import AddItemForm from "./components/AddItemForm";
@@ -59,7 +58,7 @@ const App = () => {
             <EditUserForm />
           </Route>
           <Route path="/">
-            <Items />
+            <Home />
           </Route>
         </Switch>
       </Container>

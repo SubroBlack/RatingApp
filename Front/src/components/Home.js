@@ -5,7 +5,7 @@ import Item from "./Item";
 
 import Carousel from "./Carousel";
 
-const Items = () => {
+const Home = () => {
   const [singleItem, setSingleItem] = useState(null);
 
   const dispatch = useDispatch();
@@ -41,4 +41,4 @@ const Items = () => {
   return <div>{show()}</div>;
 };
 
-export default Items;
+export default Home;

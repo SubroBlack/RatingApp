@@ -28,7 +28,7 @@ const itemSchema = mongoose.Schema({
   review: [
     {
       comment: { type: String, required: false },
-      rate: { type: Number, min: 1, max: 5, required: true },
+      rate: { type: Number, min: 0.5, max: 5, required: true },
       posted: { type: Date, require: true },
     },
   ],
