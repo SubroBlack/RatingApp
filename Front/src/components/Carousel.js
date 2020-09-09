@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "3vw",
   },
   imgContainer: {
-    width: "90vw",
+    width: "100%",
     paddingTop: "0.5vmin",
   },
   img: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
   },
   carouselText: {
-    margin: "auto",
+    textAlign: "center",
   },
 }));
 
@@ -86,7 +86,7 @@ const Carousel = ({ items, open }) => {
       <MobileStepper
         steps={maxSteps}
         position="static"
-        variant="text"
+        variant="dots"
         activeStep={activeStep}
         nextButton={
           <Button

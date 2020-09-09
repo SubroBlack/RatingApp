@@ -20,10 +20,11 @@ const labels = {
 
 const useStyles = makeStyles({
   root: {
-    width: 200,
     display: "flex",
-    alignItems: "center",
+    width: "90vw",
+    justifyContent: "center",
   },
+  ratings: {},
 });
 
 const Review = ({ item }) => {
@@ -45,12 +46,20 @@ const Review = ({ item }) => {
     setValue(0);
   };
 
+  /*
+  // Text for rating
+  {value !== null && (
+        <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
+      )}
+  */
+
   return (
     <div className={classes.root}>
       <Rating
-        name="hover-feedback"
+        name="size-large"
         value={value}
         precision={0.5}
+        size="large"
         onChange={(event, newValue) => {
           setValue(newValue);
           rate(newValue);
@@ -59,9 +68,6 @@ const Review = ({ item }) => {
           setHover(newHover);
         }}
       />
-      {value !== null && (
-        <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
-      )}
     </div>
   );
 };

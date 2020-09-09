@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: "1",
     fontSize: "calc(8px + 1vmin)",
     height: "8.5vh",
+    boxShadow: "none",
   },
   toolbar: {
     backgroundColor: "#282c34",
@@ -65,7 +66,7 @@ const AppMenu = () => {
         {open ? (
           <AppBar color="transparent" className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
-              <Typography className={classes.title}>
+              <Typography variant="div" className={classes.title}>
                 <h3 onClick={gotoHome}>Rating App</h3>
               </Typography>
               <Auth />
