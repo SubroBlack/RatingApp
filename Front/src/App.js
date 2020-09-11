@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Home from "./components/Home";
 import "./App.css";
@@ -18,7 +18,6 @@ import { Container } from "@material-ui/core";
 
 const App = () => {
   const dispatch = useDispatch();
-  const history = useHistory();
 
   // Setting up Logged In User
   useEffect(() => {
@@ -28,10 +27,6 @@ const App = () => {
   // Logged in User
   const logged = useSelector((state) => state.logged);
   console.log("APP Logged: ", logged);
-
-  const gotoHome = () => {
-    history.push("/");
-  };
 
   return (
     <div className="App">

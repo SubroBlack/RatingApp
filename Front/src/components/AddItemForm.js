@@ -2,6 +2,34 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { addItem } from "../reducers/items";
+import { TextField, Button, Input } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    borderStyle: "solid",
+    borderRadius: "1%",
+    borderWidth: "4px",
+    margin: "2%",
+    paddingTop: "2%",
+    paddingBottom: "2%",
+  },
+  header: {
+    textAlign: "center",
+  },
+  form: {
+    display: "grid",
+    width: "25vmax",
+    margin: "auto",
+  },
+  image: {
+    width: "25vmax",
+    height: "auto",
+    alignSelf: "center",
+    justifyself: "center",
+    //margin: "auto",
+  },
+});
 
 const AddItemForm = () => {
   // Login Form input
@@ -10,6 +38,8 @@ const AddItemForm = () => {
   const [description, setDescription] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [uploadedImage, setUploadedImage] = useState({});
+
+  const classes = useStyles();
 
   // useDispatch hook to dispatch the Action
   const dispatch = useDispatch();
@@ -52,51 +82,67 @@ const AddItemForm = () => {
   };
 
   return (
-    <div>
-      <h5>Add New Service</h5>
-      <form onSubmit={submit}>
-        <input
-          type="text"
+    <div className={classes.root}>
+      <h3 className={classes.header}>Add New Service</h3>
+      <form onSubmit={submit} className={classes.form}>
+        <TextField
+          required
+          id="outlined-required"
+          label="Title"
           name="name"
-          placeholder="Title"
           value={name}
           onChange={({ target }) => setName(target.value)}
+          variant="outlined"
         />
         <br />
-        <input
-          type="text"
+        <TextField
+          required
+          id="outlined-required"
           name="category"
-          placeholder="Category"
+          label="Category"
           value={category}
           onChange={({ target }) => setCategory(target.value)}
+          variant="outlined"
         />
         <br />
-        <input
-          type="text"
+        <TextField
+          required
+          id="outlined-multiline-flexible"
           name="description"
-          placeholder="Description"
+          label="Description"
           value={description}
           onChange={({ target }) => setDescription(target.value)}
+          variant="outlined"
         />
         <br />
-        <input
+        <Input
+          id="raised-button-file"
           type="file"
           name="image"
+          color="primary"
           onChange={(event) => {
             setUploadedImageUrl(URL.createObjectURL(event.target.files[0]));
             setUploadedImage(event.target.files[0]);
           }}
         />
         <br />
-        <img
-          src={!uploadedImageUrl.trim() ? null : uploadedImageUrl}
-          alt="upload"
-        />
+        {!uploadedImageUrl.trim() ? null : (
+          <img
+            src={!uploadedImageUrl.trim() ? null : uploadedImageUrl}
+            alt="upload"
+            className={classes.image}
+          />
+        )}
         <br />
-        <input type="submit" />
+        <Button type="submit" color="primary">
+          Submit
+        </Button>
         <br />
-        <button onClick={cancel}>Cancel</button>
+        <Button onClick={cancel} color="secondary">
+          Cancel
+        </Button>
       </form>
+      <br />
     </div>
   );
 };

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   header: {
-    paddingLeft: "3vw",
+    textAlign: "center",
   },
   imgContainer: {
     width: "100%",
@@ -27,9 +27,6 @@ const useStyles = makeStyles((theme) => ({
     width: "auto",
     maxWidth: "90vw",
     overflow: "hidden",
-  },
-  carouselText: {
-    textAlign: "center",
   },
 }));
 
@@ -75,10 +72,7 @@ const Carousel = ({ items, open }) => {
         ))}
       </AutoPlaySwipeableViews>
       <div className={classes.header}>
-        <div
-          className={classes.carouselText}
-          onClick={() => open(items[activeStep])}
-        >
+        <div onClick={() => open(items[activeStep])}>
           {items[activeStep].name}
         </div>
         <Review item={items[activeStep]} />

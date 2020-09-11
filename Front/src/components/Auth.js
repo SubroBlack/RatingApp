@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { logOut, AdminLogOut } from "../reducers/login.js";
 import { useDispatch, useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 import AdminLoginForm from "./AdminLoginForm";
 
-import { Button } from "@material-ui/core";
+const useStyles = makeStyles({
+  root: {},
+  button: {
+    fontSize: "calc(7px + 0.5vmin)",
+  },
+});
 
 const Auth = () => {
+  const classes = useStyles();
   // Using History to redirect
   const history = useHistory();
   // To dispatch events
@@ -59,47 +67,89 @@ const Auth = () => {
     if (!loggedUser) {
       return (
         <>
-          <Button size="small" onClick={loginFormButton} color="inherit">
+          <Button
+            className={classes.button}
+            size="small"
+            onClick={loginFormButton}
+            color="inherit"
+          >
             Login
           </Button>
-          <Button color="inherit" size="small" onClick={signup}>
+          <Button
+            className={classes.button}
+            color="inherit"
+            size="small"
+            onClick={signup}
+          >
             Join
           </Button>
         </>
       );
     } else if (loggedUser.role === "user") {
       return (
-        <div>
+        <>
           {form ? (
             <>
               <AdminLoginForm />
-              <Button color="inherit" size="small" onClick={toggleAdminForm}>
+              <Button
+                className={classes.button}
+                color="inherit"
+                size="small"
+                onClick={toggleAdminForm}
+              >
                 Cancel
               </Button>
             </>
           ) : (
-            <Button color="inherit" size="small" onClick={toggleAdminForm}>
-              Switch to Admin
-            </Button>
+            <>
+              <Button
+                className={classes.button}
+                color="inherit"
+                size="small"
+                onClick={toggleAdminForm}
+              >
+                Switch to Admin
+              </Button>
+              <Button
+                className={classes.button}
+                color="inherit"
+                size="small"
+                onClick={signout}
+              >
+                Logout
+              </Button>
+            </>
           )}
-          <Button color="inherit" size="small" onClick={signout}>
-            Logout
-          </Button>
-        </div>
+        </>
       );
     } else if (loggedUser.role === "admin") {
       return (
-        <div>
-          <Button color="inherit" size="small" onClick={switchToUser}>
+        <>
+          <Button
+            className={classes.button}
+            color="inherit"
+            size="small"
+            onClick={switchToUser}
+          >
             User Mode
           </Button>
-          <Button color="inherit" size="small" onClick={signout}>
-            Logout
-          </Button>
-          <Button color="inherit" size="small" onClick={dashboard}>
+          <Button
+            className={classes.button}
+            color="inherit"
+            size="small"
+            onClick={dashboard}
+          >
             Dashboard
           </Button>
-        </div>
+          <Button
+            className={classes.button}
+            color="inherit"
+            size="small"
+            onClick={signout}
+          >
+            Logout
+          </Button>
+        </>
       );
     }
   };

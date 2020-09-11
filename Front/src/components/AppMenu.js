@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     flexGrow: "1",
     fontSize: "calc(8px + 1vmin)",
-    height: "8.5vh",
+    height: "6.5vh",
     boxShadow: "none",
   },
   toolbar: {
@@ -27,14 +27,14 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     color: "white",
     paddingLeft: "3vw",
+    minHeight: "100%",
   },
   menuButton: {
     position: "relative",
     backgroundColor: "#282c34",
     color: "white",
-    height: "8.5vh",
-    borderRadius: "50%",
-    marginLeft: "1vmin",
+    height: "6.5vh",
+    borderRadius: "10%",
   },
   title: {
     flexGrow: ".90",
@@ -65,8 +65,8 @@ const AppMenu = () => {
       <div className={classes.root}>
         {open ? (
           <AppBar color="transparent" className={classes.appBar}>
-            <Toolbar className={classes.toolbar}>
-              <Typography variant="div" className={classes.title}>
+            <Toolbar disableGutters={true} className={classes.toolbar}>
+              <Typography variant="inherit" className={classes.title}>
                 <h3 onClick={gotoHome}>Rating App</h3>
               </Typography>
               <Auth />

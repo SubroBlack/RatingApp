@@ -2,29 +2,43 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
-import Box from "@material-ui/core/Box";
+import { Box } from "@material-ui/core/";
 import { rateItem } from "../reducers/items";
 
 const labels = {
-  0.5: "Useless",
-  1: "Useless+",
+  0.5: "Completely Useless",
+  0.75: "Useless",
+  1: "Almost Useless",
+  1.25: "Disappointing",
   1.5: "Poor",
-  2: "Poor+",
-  2.5: "Ok",
-  3: "Ok+",
-  3.5: "Good",
-  4: "Good+",
-  4.5: "Excellent",
-  5: "Excellent+",
+  1.75: "Very Bad",
+  2: "Bad",
+  2.25: "Not So Bad",
+  2.5: "Barely Fine",
+  2.75: "Fine",
+  3: "Good",
+  3.25: "Very Good",
+  3.5: "Cool",
+  3.75: "Very Cool",
+  4: "Super",
+  4.25: "Great",
+  4.5: "Awesome",
+  4.75: "Excellent",
+  5: "Amazing",
 };
 
 const useStyles = makeStyles({
   root: {
     display: "flex",
     width: "90vw",
+    margin: "auto",
     justifyContent: "center",
   },
-  ratings: {},
+  fixedRate: {
+    display: "block",
+    justifyContent: "center",
+    textAlign: "center",
+  },
 });
 
 const Review = ({ item }) => {
@@ -35,7 +49,7 @@ const Review = ({ item }) => {
   const dispatch = useDispatch();
 
   // Logged in User
-  const logged = useSelector((state) => state.logged).role;
+  const logged = useSelector((state) => state.logged);
 
   // Function to rate
   const rate = (rate) => {
@@ -53,21 +67,45 @@ const Review = ({ item }) => {
       )}
   */
 
+  if (item.review) {
+    let sum = 0;
+    Array.from(item.review, (x) => (sum = sum + x.rate));
+    const average = sum / item.review.length;
+
+    item.rate = average;
+  }
+
+  console.log("The Average Rating of the Item: ", item.rate);
+
   return (
     <div className={classes.root}>
-      <Rating
-        name="size-large"
-        value={value}
-        precision={0.5}
-        size="large"
-        onChange={(event, newValue) => {
-          setValue(newValue);
-          rate(newValue);
-        }}
-        onChangeActive={(event, newHover) => {
-          setHover(newHover);
-        }}
-      />
+      {item.rate ? (
+        <div className={classes.fixedRate}>
+          <Rating
+            name="size-large"
+            value={item.rate}
+            precision={0.25}
+            size="large"
+            disabled={true}
+          />
+          <br />
+          <div>{labels[item.rate]}</div>
+        </div>
+      ) : (
+        <Rating
+          name="size-large"
+          value={value}
+          precision={0.5}
+          size="large"
+          onChange={(event, newValue) => {
+            setValue(newValue);
+            rate(newValue);
+          }}
+          onChangeActive={(event, newHover) => {
+            setHover(newHover);
+          }}
+        />
+      )}
     </div>
   );
 };

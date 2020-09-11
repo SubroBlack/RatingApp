@@ -2,6 +2,27 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getUser, editUser } from "../reducers/user";
+import { TextField, Button } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  root: {
+    borderStyle: "solid",
+    borderRadius: "1%",
+    borderWidth: "4px",
+    margin: "2%",
+    paddingTop: "2%",
+    paddingBottom: "2%",
+  },
+  header: {
+    textAlign: "center",
+  },
+  form: {
+    display: "grid",
+    width: "25vmax",
+    margin: "auto",
+  },
+});
 
 const EditUserForm = () => {
   // Edit Form input
@@ -9,6 +30,8 @@ const EditUserForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [adminPin, setAdminPin] = useState("");
+
+  const classes = useStyles();
 
   // useHistory to redirect
   const history = useHistory();
@@ -48,45 +71,60 @@ const EditUserForm = () => {
   };
 
   return (
-    <div>
-      <h5>Editing {user.name}</h5>
-
-      <form onSubmit={submit}>
-        <input
-          type="text"
+    <div className={classes.root}>
+      <h3 className={classes.header}>Editing {user.name}</h3>
+      <br />
+      <form onSubmit={submit} className={classes.form}>
+        <TextField
+          required
+          id="outlined-required"
+          label="Name"
           name="name"
-          placeholder="Name of The Provider"
           value={name}
           onChange={({ target }) => setName(target.value)}
+          variant="outlined"
         />
         <br />
-        <input
-          type="text"
+        <TextField
+          required
+          id="outlined-required"
+          label="Email"
           name="email"
-          placeholder="Email"
           value={email}
           onChange={({ target }) => setEmail(target.value)}
+          variant="outlined"
         />
         <br />
-        <input
-          type="password"
+        <TextField
+          required
+          id="outlined-password-input"
+          label="Password"
           name="password"
-          placeholder="Password"
+          type="password"
           value={password}
           onChange={({ target }) => setPassword(target.value)}
+          variant="outlined"
         />
         <br />
-        <input
-          type="password"
+        <TextField
+          required
+          id="outlined-password-input"
+          label="Admin Pin"
           name="adminPin"
-          placeholder="Admin Pin"
+          type="password"
           value={adminPin}
           onChange={({ target }) => setAdminPin(target.value)}
+          variant="outlined"
         />
         <br />
-        <input type="submit" />
+        <Button type="submit" color="primary">
+          Submit
+        </Button>
         <br />
-        <button onClick={cancel}>Cancel</button>
+        <Button onClick={cancel} color="secondary">
+          Cancel
+        </Button>
+        <br />
       </form>
     </div>
   );

@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUser } from "../reducers/user";
 import { logOut } from "../reducers/login";
+import { Button } from "@material-ui/core";
 
 const DashBoard = () => {
   // Dispatch
@@ -44,10 +45,16 @@ const DashBoard = () => {
 
   return (
     <>
-      <h5>{user.name}'s DashBoard</h5>
-      <button onClick={addItemForm}>Add an Item</button>
-      <button onClick={editUser}>Settings</button>
-      <button onClick={removeUser}>Remove Your Account</button>
+      <h3>{user.name}'s DashBoard</h3>
+      <Button color="primary" onClick={addItemForm}>
+        Add an Item
+      </Button>
+      <Button color="primary" onClick={editUser}>
+        Settings
+      </Button>
+      <Button color="secondary" onClick={removeUser}>
+        Remove Your Account
+      </Button>
     </>
   );
 };
