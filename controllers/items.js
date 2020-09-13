@@ -145,7 +145,7 @@ module.exports = (upload) => {
     item.review = newReviews;
     console.log("New ITEM :", item.review);
     await item.save();
-    res.json(item.toJSON());
+    res.json(item.toObject());
   });
 
   // Deleting the Item

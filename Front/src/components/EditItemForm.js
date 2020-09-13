@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { getItem, editItem } from "../reducers/items";
-import { TextField, Button, Input } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
@@ -119,8 +119,8 @@ const EditItemForm = () => {
         />
         <br />
         <TextField
-          required
           id="outlined-multiline-flexible"
+          rowsMax="4"
           name="description"
           label="Description"
           value={description}

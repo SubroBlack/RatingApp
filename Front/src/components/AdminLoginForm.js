@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { TextField, Input, InputBase, Button } from "@material-ui/core";
+import { Input } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { adminSignIn } from "../reducers/login";
 
@@ -41,6 +41,7 @@ const AdminLoginForm = () => {
           name="adminPin"
           type="password"
           size="small"
+          color="secondary"
           className={classes.input}
           value={adminPin}
           onChange={({ target }) => setAdminPin(target.value)}

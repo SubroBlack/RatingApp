@@ -67,19 +67,20 @@ const Review = ({ item }) => {
       )}
   */
 
-  if (item.review) {
-    let sum = 0;
-    Array.from(item.review, (x) => (sum = sum + x.rate));
-    const average = sum / item.review.length;
-
-    item.rate = average;
+  if (logged && logged.role === "admin") {
+    if (item.review) {
+      let sum = 0;
+      Array.from(item.review, (x) => (sum = sum + x.rate));
+      const average = sum / item.review.length;
+      item.rate = average;
+    }
   }
 
   console.log("The Average Rating of the Item: ", item.rate);
 
   return (
     <div className={classes.root}>
-      {item.rate ? (
+      {logged && logged.role === "admin" ? (
         <div className={classes.fixedRate}>
           <Rating
             name="size-large"

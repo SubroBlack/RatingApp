@@ -20,7 +20,9 @@ export const addUser = (user) => {
       type: "SET_USER",
       data: newUser,
     });
-    dispatch(notify({ data: `Welcome ${newUser.name}` }, 5));
+    dispatch(
+      notify({ data: `Welcome ${newUser.name}`, category: "success" }, 5)
+    );
   };
 };
 
@@ -32,7 +34,9 @@ export const editUser = (user) => {
       type: "SET_USER",
       data: editedUser,
     });
-    dispatch(notify({ data: `${editedUser.name} updated` }, 3));
+    dispatch(
+      notify({ data: `${editedUser.name} updated`, category: "success" }, 5)
+    );
   };
 };
 
@@ -44,7 +48,7 @@ export const deleteUser = (user) => {
       type: "DELETE",
       data: user,
     });
-    dispatch(notify({ data: `CIAO ${user.name}` }, 3));
+    dispatch(notify({ data: `CIAO ${user.name}`, category: "success" }, 3.5));
   };
 };
 

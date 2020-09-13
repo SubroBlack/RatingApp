@@ -3,7 +3,7 @@ let code = "";
 
 // Function to notify of anything
 /*
-Message = {data: "notification text", category: notify/alert/error}
+  Notification = {data: "notification text", category: error/warning/success/info}
 */
 const setMessage = (message) => {
   return {

@@ -22,7 +22,7 @@ export const signIn = (email, password) => {
         JSON.stringify(loggedUser)
       );
       await dispatch(setLogged(loggedUser));
-      await dispatch(notify({ data: `Welcome` }, 5));
+      await dispatch(notify({ data: `Welcome`, category: "success" }, 5));
     } catch (exception) {
       console.log(exception);
     }
@@ -36,7 +36,7 @@ export const logOut = () => {
     window.localStorage.removeItem("loggedRatingAppUser");
     const user = await helper.checkLogged();
     await dispatch(setLogged(user));
-    await dispatch(notify({ data: "See Ya!" }, 5));
+    await dispatch(notify({ data: "See Ya!", category: "success" }, 5));
   };
 };
 
@@ -59,7 +59,7 @@ export const adminSignIn = (adminPin) => {
         "loggedRatingAppAdmin",
         JSON.stringify(loggedAdmin)
       );
-      await dispatch(notify({ data: `Admin mode` }, 5));
+      await dispatch(notify({ data: `Admin mode`, category: "success" }, 5));
       await dispatch(setLogged(loggedAdmin));
     } catch (exception) {
       console.log(exception);
@@ -72,7 +72,7 @@ export const AdminLogOut = () => {
   return async (dispatch) => {
     window.localStorage.removeItem("loggedRatingAppAdmin");
     const user = await helper.checkLogged();
-    await dispatch(notify({ data: `User mode` }, 5));
+    await dispatch(notify({ data: `User mode`, category: "success" }, 5));
     await dispatch(setLogged(user));
   };
 };

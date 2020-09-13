@@ -106,7 +106,6 @@ const AddItemForm = () => {
         />
         <br />
         <TextField
-          required
           id="outlined-multiline-flexible"
           name="description"
           label="Description"
