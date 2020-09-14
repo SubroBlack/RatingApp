@@ -67,6 +67,7 @@ const Review = ({ item }) => {
       )}
   */
 
+  // The average of rating of the Item
   if (logged && logged.role === "admin") {
     if (item.review) {
       let sum = 0;
