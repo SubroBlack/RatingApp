@@ -56,6 +56,17 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "1%",
     paddingBottom: "1%",
   },
+  review: {
+    display: "flex",
+  },
+  rates: {
+    maxWidth: "40%",
+  },
+  comment: {
+    width: "60%",
+    marginLeft: "auto",
+    textAlign: "center",
+  },
 }));
 
 const Item = () => {
@@ -194,15 +205,19 @@ const Item = () => {
             {item.review ? (
               <>
                 {item.review.map((review, index) => (
-                  <div key={index}>
-                    <Rating
-                      name="size-medium"
-                      value={review.rate}
-                      precision={0.5}
-                      size="medium"
-                      disabled={true}
-                    />
-                    <b>{review.comment ? review.comment : null}</b>
+                  <div key={index} className={classes.review}>
+                    <span className={classes.rates}>
+                      <Rating
+                        name="size-medium"
+                        value={review.rate}
+                        precision={0.5}
+                        size="medium"
+                        disabled={true}
+                      />
+                    </span>
+                    <span className={classes.comment}>
+                      {review.comment ? review.comment : null}
+                    </span>
                   </div>
                 ))}
               </>

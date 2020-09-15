@@ -18,13 +18,14 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     position: "relative",
+    backgroundColor: "#282c34",
     flexGrow: "1",
     fontSize: "calc(8px + 1vmin)",
     height: "6.5vh",
     boxShadow: "none",
+    padding: "1%",
   },
   toolbar: {
-    backgroundColor: "#282c34",
     display: "flex",
     color: "white",
     paddingLeft: "3vw",
@@ -36,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
     height: "6.5vh",
     borderRadius: "10%",
+    padding: "1%",
   },
   title: {
     flexGrow: ".90",

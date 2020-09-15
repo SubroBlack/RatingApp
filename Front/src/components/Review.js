@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Rating from "@material-ui/lab/Rating";
-import { Box } from "@material-ui/core/";
 import { rateItem } from "../reducers/items";
 
 const labels = {
@@ -39,6 +38,11 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
   },
+  commentSection: {
+    position: "relative",
+    marginTop: "auto",
+    marginBottom: "auto",
+  },
 });
 
 const Review = ({ item }) => {
@@ -60,13 +64,6 @@ const Review = ({ item }) => {
     setValue(0);
   };
 
-  /*
-  // Text for rating
-  {value !== null && (
-        <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
-      )}
-  */
-
   // The average of rating of the Item
   if (logged && logged.role === "admin") {
     if (item.review) {
@@ -76,8 +73,6 @@ const Review = ({ item }) => {
       item.rate = average;
     }
   }
-
-  console.log("The Average Rating of the Item: ", item.rate);
 
   return (
     <div className={classes.root}>
