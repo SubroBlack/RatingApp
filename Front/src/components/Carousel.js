@@ -28,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: "90vw",
     overflow: "hidden",
   },
+  stepper: {
+    backgroundColor: "#282c34",
+  },
+  stepperLabel: {
+    color: "white",
+  },
 }));
 
 const Carousel = ({ items, open }) => {
@@ -83,11 +89,13 @@ const Carousel = ({ items, open }) => {
       </div>
       <MobileStepper
         steps={maxSteps}
+        className={classes.stepper}
         position="static"
         variant="dots"
         activeStep={activeStep}
         nextButton={
           <Button
+            className={classes.stepperLabel}
             size="small"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
@@ -101,7 +109,12 @@ const Carousel = ({ items, open }) => {
           </Button>
         }
         backButton={
-          <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
+          <Button
+            className={classes.stepperLabel}
+            size="small"
+            onClick={handleBack}
+            disabled={activeStep === 0}
+          >
             {theme.direction === "rtl" ? (
               <KeyboardArrowRight />
             ) : (
