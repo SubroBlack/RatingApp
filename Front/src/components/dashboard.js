@@ -93,7 +93,9 @@ const DashBoard = () => {
           </span>
         </CardActions>
       </CardActionArea>
-      {items ? items.map((item, index) => <ItemMini item={item} />) : null}
+      {items
+        ? items.map((item, index) => <ItemMini key={index} item={item} />)
+        : null}
     </div>
   );
 };

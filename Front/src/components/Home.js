@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { allItems } from "../reducers/items";
-import Item from "./Item";
 
 import Carousel from "./Carousel";
 
 const Home = () => {
-  const [singleItem, setSingleItem] = useState(null);
+  const history = useHistory();
 
   const dispatch = useDispatch();
 
@@ -24,16 +24,13 @@ const Home = () => {
 
   const openItem = (item) => {
     logged.role === "admin"
-      ? setSingleItem(item)
+      ? history.push(`/item/${item.id}`)
       : console.log("Not Authorized");
   };
 
   const show = () => {
     if (items.length < 1) {
       return null;
-    }
-    if (singleItem) {
-      return <Item item={singleItem} clear={setSingleItem} />;
     }
     return <Carousel items={items} open={openItem} />;
   };

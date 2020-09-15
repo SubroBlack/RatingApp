@@ -1,21 +1,25 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteItem } from "../reducers/items";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, CardMedia } from "@material-ui/core";
+import { Card } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: "90vmin",
+    maxWidth: "95vmin",
     margin: "auto",
-    marginBottom: "2%",
-    padding: "2%",
+    marginBottom: "4%",
+    padding: "1.5%",
     display: "flex",
   },
+  media: {
+    maxWidth: "55%",
+    margin: "0%",
+    padding: "0%",
+  },
   img: {
-    height: "25vmin",
+    height: "30vmin",
     marginRight: "auto",
   },
   content: {
@@ -29,33 +33,20 @@ const useStyles = makeStyles((theme) => ({
 
 const ItemMini = ({ item }) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
   const imgUrl = "/api/items/image/";
 
-  // Dispatch
-  const dispatch = useDispatch();
   // Logged in User
   const logged = useSelector((state) => state.logged);
   const history = useHistory();
 
-  // GOto Edit Item form
-  const editItem = () => {
-    history.push(`/edit/${item.id}`);
-  };
-
-  // Delete the current Item
-  const removeItem = async () => {
-    dispatch(deleteItem(item));
-    //clear();
-  };
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
   if (!item) {
     return null;
   }
+
+  // Open the Item
+  const openItem = () => {
+    history.push(`/item/${item.id}`);
+  };
 
   // The average of rating of the Item
   if (logged && logged.role === "admin") {
@@ -77,21 +68,20 @@ const ItemMini = ({ item }) => {
   const date = new Date(Date.parse(item.posted));
   const dateString = date.toLocaleDateString("en-US", options);
 
-  console.log("Item: ", item);
-
-  /*
-<CardMedia
-          className={classes.media}
-          image={imgUrl + item.filename}
-          title={item.filename}
-        />
-  */
-
   const show = () => {
     return (
-      <Card className={classes.root} raised={true} key={item.id}>
+      <Card
+        className={classes.root}
+        raised={true}
+        key={item.id}
+        onClick={openItem}
+      >
         <span className={classes.media}>
-          <img className={classes.img} src={imgUrl + item.filename} />
+          <img
+            className={classes.img}
+            alt={item.filename}
+            src={imgUrl + item.filename}
+          />
         </span>
         <span className={classes.content}>
           <Rating
@@ -109,6 +99,7 @@ const ItemMini = ({ item }) => {
             <br />
             Category: {item.category}
             <br />
+            Total Reviews: {item.review ? item.review.length : null}
           </span>
         </span>
       </Card>

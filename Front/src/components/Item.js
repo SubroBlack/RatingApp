@@ -1,19 +1,17 @@
-import React from "react";
-import { useHistory } from "react-router";
+import React, { useEffect } from "react";
+import { useParams, useHistory } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteItem } from "../reducers/items";
+import { deleteItem, getItem } from "../reducers/items";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import {
   Card,
   CardHeader,
-  CardMedia,
   CardContent,
   CardActions,
   Collapse,
   Avatar,
   IconButton,
-  Button,
 } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -60,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Item = ({ item, clear }) => {
+const Item = () => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const imgUrl = "/api/items/image/";
@@ -70,6 +68,19 @@ const Item = ({ item, clear }) => {
   // Logged in User
   const logged = useSelector((state) => state.logged);
   const history = useHistory();
+  const id = useParams().id;
+
+  // Fetching the item according the role of user signed in
+  useEffect(() => {
+    dispatch(getItem(id));
+  }, [logged, id, dispatch]);
+
+  // The Item
+  const result = useSelector((state) => state.items);
+  if (!result || result.length < 1) {
+    return null;
+  }
+  const item = result[0];
 
   // GOto Edit Item form
   const editItem = () => {
@@ -79,16 +90,12 @@ const Item = ({ item, clear }) => {
   // Delete the current Item
   const removeItem = async () => {
     dispatch(deleteItem(item));
-    clear();
+    window.history.back();
   };
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  if (!item) {
-    return null;
-  }
 
   // The average of rating of the Item
   if (logged && logged.role === "admin") {
@@ -125,7 +132,7 @@ const Item = ({ item, clear }) => {
             <IconButton
               aria-label="close"
               onClick={() => {
-                clear();
+                window.history.back();
               }}
             >
               <CloseIcon />
@@ -136,7 +143,11 @@ const Item = ({ item, clear }) => {
         />
         <CardContent>{item.category}</CardContent>
         <div className={classes.imgContainer}>
-          <img className={classes.media} src={imgUrl + item.filename} />
+          <img
+            className={classes.media}
+            alt={item.filename}
+            src={imgUrl + item.filename}
+          />
         </div>
 
         <CardContent>
