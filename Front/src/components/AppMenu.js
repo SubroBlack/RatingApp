@@ -14,6 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
+    marginBottom: "2%",
   },
   appBar: {
     position: "relative",

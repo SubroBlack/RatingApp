@@ -60,7 +60,11 @@ const Carousel = ({ items, open }) => {
         enableMouseEvents
       >
         {items.map((step, index) => (
-          <div className={classes.imgContainer} key={index}>
+          <div
+            className={classes.imgContainer}
+            key={index}
+            onClick={() => open(items[activeStep])}
+          >
             {Math.abs(activeStep - index) <= 2 ? (
               <img
                 className={classes.img}

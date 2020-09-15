@@ -25,15 +25,15 @@ const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "90vmin",
     margin: "auto",
+    marginBottom: "4%",
+  },
+  imgContainer: {
+    display: "flex",
+    backgroundColor: "#282c34",
   },
   media: {
-    height: 1,
-    paddingTop: "56.25%", // 16:9
-    display: "flex",
-    //margin: "auto",
-    //height: "35vh",
-    maxWidth: "100%",
-    overflow: "hidden",
+    height: "50vmin",
+    margin: "auto",
   },
   expand: {
     transform: "rotate(0deg)",
@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: "#282c34",
   },
-
   fixedRate: {
     display: "block",
     justifyContent: "center",
@@ -63,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Item = ({ item, clear }) => {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(true);
+  const [expanded, setExpanded] = React.useState(false);
   const imgUrl = "/api/items/image/";
 
   // Dispatch
@@ -136,11 +135,10 @@ const Item = ({ item, clear }) => {
           subheader={dateString}
         />
         <CardContent>{item.category}</CardContent>
-        <CardMedia
-          className={classes.media}
-          image={imgUrl + item.filename}
-          title={item.filename}
-        />
+        <div className={classes.imgContainer}>
+          <img className={classes.media} src={imgUrl + item.filename} />
+        </div>
+
         <CardContent>
           <>
             <div className={classes.fixedRate}>
@@ -181,7 +179,7 @@ const Item = ({ item, clear }) => {
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent className={classes.expanded}>
+          <CardContent>
             {item.review ? (
               <>
                 {item.review.map((review, index) => (
