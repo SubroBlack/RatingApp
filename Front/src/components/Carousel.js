@@ -61,37 +61,9 @@ const Carousel = ({ items, open }) => {
     setActiveStep(step);
   };
 
-  return (
-    <div className={classes.root}>
-      <AutoPlaySwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-        index={activeStep}
-        onChangeIndex={handleStepChange}
-        enableMouseEvents
-        autoplay={auto}
-      >
-        {items.map((step, index) => (
-          <div
-            className={classes.imgContainer}
-            key={index}
-            onClick={() => open(items[activeStep])}
-          >
-            {Math.abs(activeStep - index) <= 2 ? (
-              <img
-                className={classes.img}
-                src={imgUrl + step.filename}
-                alt={step.name}
-              />
-            ) : null}
-          </div>
-        ))}
-      </AutoPlaySwipeableViews>
-      <div>
-        <div className={classes.header}>{items[activeStep].name}</div>
-        <div className={classes.reviewSection}>
-          <Review item={items[activeStep]} setAuto={setAuto} />
-        </div>
-      </div>
+  // MobileStepper (Low Index Back)
+  const stepper = () => {
+    return (
       <MobileStepper
         steps={maxSteps}
         className={classes.stepper}
@@ -129,6 +101,41 @@ const Carousel = ({ items, open }) => {
           </Button>
         }
       />
+    );
+  };
+
+  return (
+    <div className={classes.root}>
+      <AutoPlaySwipeableViews
+        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+        index={activeStep}
+        onChangeIndex={handleStepChange}
+        enableMouseEvents
+        autoplay={auto}
+      >
+        {items.map((step, index) => (
+          <div
+            className={classes.imgContainer}
+            key={index}
+            onClick={() => open(items[activeStep])}
+          >
+            {Math.abs(activeStep - index) <= 2 ? (
+              <img
+                className={classes.img}
+                src={imgUrl + step.filename}
+                alt={step.name}
+              />
+            ) : null}
+          </div>
+        ))}
+      </AutoPlaySwipeableViews>
+      <br />
+      <div>
+        <div className={classes.header}>{items[activeStep].name}</div>
+        <div className={classes.reviewSection}>
+          <Review item={items[activeStep]} setAuto={setAuto} />
+        </div>
+      </div>
     </div>
   );
 };

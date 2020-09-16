@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { makeStyles } from "@material-ui/core/styles";
-import { Button, TextField } from "@material-ui/core";
-import Rating from "@material-ui/lab/Rating";
 import { rateItem } from "../reducers/items";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button, IconButton, TextField } from "@material-ui/core";
+import Rating from "@material-ui/lab/Rating";
+import CloseIcon from "@material-ui/icons/Close";
+import RateReviewIcon from "@material-ui/icons/RateReview";
 
 const labels = {
   0.5: "Completely Useless",
@@ -33,6 +35,7 @@ const useStyles = makeStyles({
     width: "90vw",
     margin: "auto",
     justifyContent: "center",
+    marginBottom: "1%",
   },
   fixedRate: {
     display: "block",
@@ -42,28 +45,29 @@ const useStyles = makeStyles({
   commentButton: {
     position: "absolute",
     right: "3%",
+    bottom: "5%",
     zIndex: "1",
     margin: "1%",
+    color: "#4d0f00",
   },
   commentSection: {
     position: "fixed",
     width: "100%",
-    top: "10%",
+    top: "15vh",
     margin: "auto",
-    backgroundColor: "lightgrey",
+    backgroundColor: "#b3b3b3",
+    opacity: "0.9",
     color: "white",
-    padding: "8%",
   },
   commentForm: {
-    display: "grid",
-    width: "50%",
+    width: "85%",
     margin: "auto",
+    paddingBottom: "10%",
   },
 });
 
 const Review = ({ item, setAuto }) => {
   const [value, setValue] = useState(0);
-  const [hover, setHover] = useState(-1);
   const [commentSection, setCommentSection] = useState(false);
   const [comment, setComment] = useState("");
   const classes = useStyles();
@@ -73,16 +77,21 @@ const Review = ({ item, setAuto }) => {
   // Logged in User
   const logged = useSelector((state) => state.logged);
 
+  // Close
+  const close = () => {
+    setCommentSection(false);
+    setValue(0);
+    setComment("");
+    setAuto(true);
+  };
+
   // Function to send review
   const sendReview = () => {
     const review = {};
     review.rate = value;
     review.comment = comment;
     dispatch(rateItem(item.id, review));
-    setCommentSection(false);
-    setValue(0);
-    setComment("");
-    setAuto(true);
+    close();
   };
 
   // Comment Section
@@ -90,34 +99,42 @@ const Review = ({ item, setAuto }) => {
     if (commentSection) {
       return (
         <div className={classes.commentSection}>
-          <h5>Reviewing {item.name}</h5>
-          <form className={classes.commentForm}>
-            <div>
-              <Rating
-                name="review-rate"
-                value={value}
-                precision={0.5}
-                size="large"
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-              />
-            </div>
-            <div>
-              <TextField
-                id="outlined-multiline-flexible"
-                required={true}
-                name="comment"
-                label="Comment"
-                value={comment}
-                onChange={({ target }) => setComment(target.value)}
-                variant="outlined"
-              />
-            </div>
-            <Button type="submit" onClick={sendReview}>
-              Submit
-            </Button>
-          </form>
+          <IconButton className={classes.closeButton} onClick={close}>
+            <CloseIcon />
+          </IconButton>
+          <div className={classes.commentForm}>
+            <form className={classes.fixedRate}>
+              <h5>Reviewing {item.name}</h5>
+              <div>
+                <Rating
+                  name="review-rate"
+                  value={value}
+                  precision={0.5}
+                  size="large"
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                />
+              </div>
+              <br />
+              <div>
+                <TextField
+                  id="outlined-multiline-flexible"
+                  required={true}
+                  rowsMax="2"
+                  name="comment"
+                  label="Comment"
+                  value={comment}
+                  onChange={({ target }) => setComment(target.value)}
+                  variant="outlined"
+                />
+              </div>
+              <br />
+              <Button type="submit" onClick={sendReview}>
+                Submit
+              </Button>
+            </form>
+          </div>
         </div>
       );
     }
@@ -171,15 +188,15 @@ const Review = ({ item, setAuto }) => {
             }}
           />
           <span>
-            <Button
+            <IconButton
               className={classes.commentButton}
               onClick={() => {
                 setAuto(false);
                 setCommentSection(true);
               }}
             >
-              Comment
-            </Button>
+              <RateReviewIcon />
+            </IconButton>
           </span>
           {commentArea()}
         </>
