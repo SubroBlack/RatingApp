@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
+import { Button, TextField } from "@material-ui/core";
 import Rating from "@material-ui/lab/Rating";
 import { rateItem } from "../reducers/items";
 
@@ -38,16 +39,33 @@ const useStyles = makeStyles({
     justifyContent: "center",
     textAlign: "center",
   },
+  commentButton: {
+    position: "absolute",
+    right: "3%",
+    zIndex: "1",
+    margin: "1%",
+  },
   commentSection: {
-    position: "relative",
-    marginTop: "auto",
-    marginBottom: "auto",
+    position: "fixed",
+    width: "100%",
+    top: "10%",
+    margin: "auto",
+    backgroundColor: "lightgrey",
+    color: "white",
+    padding: "8%",
+  },
+  commentForm: {
+    display: "grid",
+    width: "50%",
+    margin: "auto",
   },
 });
 
-const Review = ({ item }) => {
-  const [value, setValue] = React.useState(0);
-  const [hover, setHover] = React.useState(-1);
+const Review = ({ item, setAuto }) => {
+  const [value, setValue] = useState(0);
+  const [hover, setHover] = useState(-1);
+  const [commentSection, setCommentSection] = useState(false);
+  const [comment, setComment] = useState("");
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -55,10 +73,60 @@ const Review = ({ item }) => {
   // Logged in User
   const logged = useSelector((state) => state.logged);
 
-  // Function to rate
-  const rate = (rate) => {
+  // Function to send review
+  const sendReview = () => {
     const review = {};
-    review.rate = rate;
+    review.rate = value;
+    review.comment = comment;
+    dispatch(rateItem(item.id, review));
+    setCommentSection(false);
+    setValue(0);
+    setComment("");
+    setAuto(true);
+  };
+
+  // Comment Section
+  const commentArea = () => {
+    if (commentSection) {
+      return (
+        <div className={classes.commentSection}>
+          <h5>Reviewing {item.name}</h5>
+          <form className={classes.commentForm}>
+            <div>
+              <Rating
+                name="review-rate"
+                value={value}
+                precision={0.5}
+                size="large"
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+              />
+            </div>
+            <div>
+              <TextField
+                id="outlined-multiline-flexible"
+                required={true}
+                name="comment"
+                label="Comment"
+                value={comment}
+                onChange={({ target }) => setComment(target.value)}
+                variant="outlined"
+              />
+            </div>
+            <Button type="submit" onClick={sendReview}>
+              Submit
+            </Button>
+          </form>
+        </div>
+      );
+    }
+  };
+
+  // Function to rate
+  const rate = () => {
+    const review = {};
+    review.rate = value;
     review.comment = "";
     dispatch(rateItem(item.id, review));
     setValue(0);
@@ -79,7 +147,7 @@ const Review = ({ item }) => {
       {logged && logged.role === "admin" ? (
         <div className={classes.fixedRate}>
           <Rating
-            name="size-large"
+            name="rate"
             value={item.rate}
             precision={0.25}
             size="large"
@@ -89,19 +157,32 @@ const Review = ({ item }) => {
           <div>{labels[item.rate]}</div>
         </div>
       ) : (
-        <Rating
-          name="size-large"
-          value={value}
-          precision={0.5}
-          size="large"
-          onChange={(event, newValue) => {
-            setValue(newValue);
-            rate(newValue);
-          }}
-          onChangeActive={(event, newHover) => {
-            setHover(newHover);
-          }}
-        />
+        <>
+          <Rating
+            name="size-large"
+            value={value}
+            precision={0.5}
+            size="large"
+            onChange={(event, newValue) => {
+              rate();
+            }}
+            onChangeActive={(event, newHover) => {
+              setValue(newHover);
+            }}
+          />
+          <span>
+            <Button
+              className={classes.commentButton}
+              onClick={() => {
+                setAuto(false);
+                setCommentSection(true);
+              }}
+            >
+              Comment
+            </Button>
+          </span>
+          {commentArea()}
+        </>
       )}
     </div>
   );

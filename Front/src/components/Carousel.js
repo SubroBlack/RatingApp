@@ -16,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
   header: {
     textAlign: "center",
   },
+  reviewSection: {
+    display: "flex",
+  },
   imgContainer: {
     width: "100%",
     paddingTop: "0.5vmin",
@@ -40,6 +43,7 @@ const Carousel = ({ items, open }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
+  const [auto, setAuto] = useState(true);
 
   // URL to fetch the iamges
   const imgUrl = "/api/items/image/";
@@ -64,6 +68,7 @@ const Carousel = ({ items, open }) => {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
+        autoplay={auto}
       >
         {items.map((step, index) => (
           <div
@@ -81,11 +86,11 @@ const Carousel = ({ items, open }) => {
           </div>
         ))}
       </AutoPlaySwipeableViews>
-      <div className={classes.header}>
-        <div onClick={() => open(items[activeStep])}>
-          {items[activeStep].name}
+      <div>
+        <div className={classes.header}>{items[activeStep].name}</div>
+        <div className={classes.reviewSection}>
+          <Review item={items[activeStep]} setAuto={setAuto} />
         </div>
-        <Review item={items[activeStep]} />
       </div>
       <MobileStepper
         steps={maxSteps}
