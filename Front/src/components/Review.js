@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     width: "90vw",
     margin: "auto",
     justifyContent: "center",
-    marginBottom: "1%",
+    marginBottom: "0.5%",
   },
   fixedRate: {
     display: "block",
@@ -44,8 +44,8 @@ const useStyles = makeStyles({
   },
   commentButton: {
     position: "absolute",
-    right: "0",
-    bottom: "0",
+    right: "0.5%",
+    bottom: "0.5%",
     zIndex: "1",
     margin: "0.5%",
     color: "#282c34",
@@ -196,7 +196,7 @@ const Review = ({ item, setAuto }) => {
                 setCommentSection(true);
               }}
             >
-              <RateReviewIcon fontSize="large" />
+              <RateReviewIcon fontSize="medium" />
             </IconButton>
           </span>
           {commentArea()}
