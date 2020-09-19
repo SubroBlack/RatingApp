@@ -44,11 +44,11 @@ const useStyles = makeStyles({
   },
   commentButton: {
     position: "absolute",
-    right: "3%",
-    bottom: "5%",
+    right: "1%",
+    bottom: "1%",
     zIndex: "1",
-    margin: "1%",
-    color: "#4d0f00",
+    //margin: "1%",
+    color: "#282c34",
   },
   commentSection: {
     position: "fixed",
@@ -189,13 +189,14 @@ const Review = ({ item, setAuto }) => {
           />
           <span>
             <IconButton
+              size="large"
               className={classes.commentButton}
               onClick={() => {
                 setAuto(false);
                 setCommentSection(true);
               }}
             >
-              <RateReviewIcon />
+              <RateReviewIcon fontSize="large" />
             </IconButton>
           </span>
           {commentArea()}

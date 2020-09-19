@@ -20,15 +20,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   imgContainer: {
+    display: "flex",
     width: "100%",
     paddingTop: "0.5vmin",
   },
   img: {
-    display: "flex",
     margin: "auto",
-    height: "70vh",
+    height: "79vh",
     width: "auto",
-    maxWidth: "90vw",
+    maxWidth: "90%",
     overflow: "hidden",
   },
   stepper: {
@@ -36,6 +36,20 @@ const useStyles = makeStyles((theme) => ({
   },
   stepperLabel: {
     color: "white",
+  },
+  stepperLabelLeft: {
+    position: "absolute",
+    left: "0",
+    bottom: "50%",
+    zIndex: "1",
+    margin: "1%",
+  },
+  stepperLabelRight: {
+    position: "absolute",
+    right: "0",
+    bottom: "50%",
+    zIndex: "1",
+    margin: "1%",
   },
 }));
 
@@ -129,6 +143,30 @@ const Carousel = ({ items, open }) => {
           </div>
         ))}
       </AutoPlaySwipeableViews>
+      <Button
+        className={classes.stepperLabelLeft}
+        size="small"
+        onClick={handleBack}
+        disabled={activeStep === 0}
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
+      </Button>
+      <Button
+        className={classes.stepperLabelRight}
+        size="small"
+        onClick={handleNext}
+        disabled={activeStep === maxSteps - 1}
+      >
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
+      </Button>
       <br />
       <div>
         <div className={classes.header}>{items[activeStep].name}</div>
