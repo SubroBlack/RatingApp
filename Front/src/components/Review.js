@@ -44,10 +44,10 @@ const useStyles = makeStyles({
   },
   commentButton: {
     position: "absolute",
-    right: "1%",
-    bottom: "1%",
+    right: "0",
+    bottom: "0",
     zIndex: "1",
-    //margin: "1%",
+    margin: "0.5%",
     color: "#282c34",
   },
   commentSection: {

@@ -42,7 +42,6 @@ const DashBoard = () => {
   // The User
   const user = useSelector((state) => state.user);
   const items = useSelector((state) => state.items);
-  console.log("Dashboard user: ", user);
   if (!user) {
     return null;
   }

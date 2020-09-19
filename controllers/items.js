@@ -73,7 +73,7 @@ module.exports = (upload) => {
       user: user._id,
     });
     const result = await newItem.save();
-    console.log("New Item", result);
+
     user.items = user.items.concat(result._id);
     await user.save();
     //mongoose.connection.close();
@@ -143,7 +143,7 @@ module.exports = (upload) => {
     const item = await Item.findById(req.params.id);
     const newReviews = item.review.concat(review);
     item.review = newReviews;
-    console.log("New ITEM :", item.review);
+
     await item.save();
     res.json(item.toObject());
   });
@@ -159,7 +159,7 @@ module.exports = (upload) => {
       return res.status(401).json({ error: "Unauthorized Action" });
     }
     await Item.findByIdAndDelete(req.params.id);
-    console.log("Item deleted");
+
     user.items = user.items.filter((a) => a.toString() !== req.params.id);
     await user.save();
     res.status(204).end();

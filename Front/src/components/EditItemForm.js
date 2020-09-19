@@ -66,8 +66,6 @@ const EditItemForm = () => {
     return null;
   }
 
-  console.log("edit item form: ", item);
-
   // Submit the Add Item Form
   const submit = async (event) => {
     event.preventDefault();

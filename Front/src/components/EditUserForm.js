@@ -48,7 +48,6 @@ const EditUserForm = () => {
   // The User
   const user = useSelector((state) => state.user);
 
-  console.log("Editing user: ", user);
   if (!user) {
     return null;
   }

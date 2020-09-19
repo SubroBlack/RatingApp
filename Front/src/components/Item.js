@@ -128,8 +128,6 @@ const Item = () => {
   const date = new Date(Date.parse(item.posted));
   const dateString = date.toLocaleDateString("en-US", options);
 
-  console.log("Item: ", item);
-
   const show = () => {
     return (
       <Card className={classes.root} raised={true}>

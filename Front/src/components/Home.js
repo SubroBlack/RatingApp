@@ -20,7 +20,6 @@ const Home = () => {
 
   // Main Items to be reviewed
   const items = useSelector((state) => state.items);
-  console.log("Items: ", items);
 
   const openItem = (item) => {
     logged.role === "admin"
