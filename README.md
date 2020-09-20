@@ -15,7 +15,7 @@ After Download:
 
 ### Back
 
-'code'npm install'code'
+`npm install`
 
 Add .env file on the root folder with following info:
 
@@ -24,13 +24,13 @@ Add .env file on the root folder with following info:
 - SECRET
 - ADMIN_SECRET
 
-'code'npm run dev'code'
+`npm run dev`
 
 ### Front
 
-'code'cd Front'code'
-'code'npm install'code'
-'code'npm start'code'
+`cd Front`
+`npm install`
+`npm start`
 
 ## Live Demo
 
