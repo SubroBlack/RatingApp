@@ -17,16 +17,17 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
   },
   reviewSection: {
-    display: "flex",
+    //display: "flex",
   },
   imgContainer: {
     display: "flex",
     width: "100%",
     paddingTop: "0.5vmin",
+    marginBottom: "0.5vmin",
   },
   img: {
     margin: "auto",
-    height: "79vh",
+    height: "80vh",
     width: "auto",
     maxWidth: "90%",
     overflow: "hidden",
@@ -34,20 +35,17 @@ const useStyles = makeStyles((theme) => ({
   stepper: {
     backgroundColor: "#282c34",
   },
-  stepperLabel: {
-    color: "white",
-  },
   stepperLabelLeft: {
     position: "absolute",
     left: "0",
-    bottom: "50%",
+    bottom: "45%",
     zIndex: "1",
     margin: "1%",
   },
   stepperLabelRight: {
     position: "absolute",
     right: "0",
-    bottom: "50%",
+    bottom: "45%",
     zIndex: "1",
     margin: "1%",
   },
@@ -73,49 +71,6 @@ const Carousel = ({ items, open }) => {
 
   const handleStepChange = (step) => {
     setActiveStep(step);
-  };
-
-  // MobileStepper (Low Index Back)
-  const stepper = () => {
-    return (
-      <MobileStepper
-        steps={maxSteps}
-        className={classes.stepper}
-        position="static"
-        variant="dots"
-        activeStep={activeStep}
-        nextButton={
-          <Button
-            className={classes.stepperLabel}
-            size="small"
-            onClick={handleNext}
-            disabled={activeStep === maxSteps - 1}
-          >
-            Next
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowLeft />
-            ) : (
-              <KeyboardArrowRight />
-            )}
-          </Button>
-        }
-        backButton={
-          <Button
-            className={classes.stepperLabel}
-            size="small"
-            onClick={handleBack}
-            disabled={activeStep === 0}
-          >
-            {theme.direction === "rtl" ? (
-              <KeyboardArrowRight />
-            ) : (
-              <KeyboardArrowLeft />
-            )}
-            Back
-          </Button>
-        }
-      />
-    );
   };
 
   return (
@@ -167,7 +122,6 @@ const Carousel = ({ items, open }) => {
           <KeyboardArrowRight />
         )}
       </Button>
-      <br />
       <div>
         <div className={classes.header}>{items[activeStep].name}</div>
         <div className={classes.reviewSection}>

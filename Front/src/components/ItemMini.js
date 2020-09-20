@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
   img: {
     height: "30vmin",
+    maxWidth: "59%",
     marginRight: "auto",
   },
   content: {
