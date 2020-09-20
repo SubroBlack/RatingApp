@@ -14,14 +14,15 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
   },
   media: {
-    maxWidth: "55%",
     margin: "0%",
     padding: "0%",
+    marginRight: "auto",
+    maxWidth: "57%",
   },
   img: {
     height: "30vmin",
-    maxWidth: "59%",
-    marginRight: "auto",
+    maxWidth: "100%",
+    //marginRight: "auto",
   },
   content: {
     width: "40%",
