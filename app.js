@@ -15,6 +15,9 @@ const middleware = require("./utils/middleware");
 
 const app = express();
 
+// To enable serving static build folder of frontend
+app.use(express.static("build"));
+
 //Express json parser
 app.use(express.json());
 
@@ -46,9 +49,6 @@ app.use(middleware.tokenExtractor);
 app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/items/", itemsRouter(upload));
-
-// To enable serving static build folder of frontend
-app.use(express.static("build"));
 
 // Middlewares
 app.use("/api*", unknownEndpoint);
