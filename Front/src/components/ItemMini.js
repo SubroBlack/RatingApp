@@ -47,7 +47,7 @@ const ItemMini = ({ item }) => {
 
   // Open the Item
   const openItem = () => {
-    history.push(`/item/${item.id}`);
+    history.push(`/items/${item.id}`);
   };
 
   // The average of rating of the Item
