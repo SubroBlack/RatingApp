@@ -28,9 +28,7 @@ Add .env file on the root folder with following info:
 
 ### Front
 
-`cd Front`
-`npm install`
-`npm start`
+` cd Front npm install npm start`
 
 ## Live Demo
 

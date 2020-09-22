@@ -39,7 +39,7 @@ const LoginForm = () => {
   // Submit the Login Form
   const handleLogin = async (event) => {
     event.preventDefault();
-    await dispatch(signIn(email, password));
+    dispatch(signIn(email, password));
     // Clearing the Login Form
     setEmail("");
     setPassword("");

@@ -23,7 +23,7 @@ const Home = () => {
 
   const openItem = (item) => {
     logged.role === "admin"
-      ? history.push(`/item/${item.id}`)
+      ? history.push(`/items/${item.id}`)
       : console.log("Not Authorized");
   };
 

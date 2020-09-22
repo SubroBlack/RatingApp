@@ -195,7 +195,7 @@ const Review = ({ item, setAuto }) => {
                 setCommentSection(true);
               }}
             >
-              <RateReviewIcon fontSize="medium" />
+              <RateReviewIcon fontSize="inherit" />
             </IconButton>
           </span>
           {commentArea()}

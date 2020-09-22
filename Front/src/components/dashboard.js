@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteUser, getUser } from "../reducers/user";
-import { logOut, setLoggedUser } from "../reducers/login";
+import { logOut } from "../reducers/login";
 import { allItems } from "../reducers/items";
 import ItemMini from "./ItemMini";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,14 +24,10 @@ const useStyles = makeStyles((theme) => ({
 const DashBoard = () => {
   // Dispatch
   const dispatch = useDispatch();
-  const classes = useStyles();
-
-  // Setting up Logged In User
-  useEffect(() => {
-    dispatch(setLoggedUser());
-  }, [dispatch]);
-
+  // useHistory hook for redirections
+  const history = useHistory();
   const logged = useSelector((state) => state.logged);
+  const classes = useStyles();
 
   // Fetching the User info
   useEffect(() => {
@@ -43,8 +39,6 @@ const DashBoard = () => {
     dispatch(allItems());
   }, [logged, dispatch]);
 
-  // useHistory hook for redirections
-  const history = useHistory();
   // The User
   const user = useSelector((state) => state.user);
   const items = useSelector((state) => state.items);
@@ -77,7 +71,7 @@ const DashBoard = () => {
       <CardActionArea>
         <CardActions disableSpacing>
           <h3>{user.name}'s DashBoard</h3>
-          <span className={classes.buttons}>
+          <div className={classes.buttons}>
             <IconButton
               color="inherit"
               onClick={addItemForm}
@@ -95,7 +89,7 @@ const DashBoard = () => {
             >
               <DeleteIcon />
             </IconButton>
-          </span>
+          </div>
         </CardActions>
       </CardActionArea>
       {items

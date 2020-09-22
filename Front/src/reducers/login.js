@@ -24,7 +24,7 @@ export const signIn = (email, password) => {
       await dispatch(setLogged(loggedUser));
       await dispatch(notify({ data: `Welcome`, category: "success" }, 5));
     } catch (exception) {
-      console.log(exception);
+      await dispatch(notify({ data: exception, category: "error" }, 5));
     }
   };
 };
@@ -59,10 +59,10 @@ export const adminSignIn = (adminPin) => {
         "loggedRatingAppAdmin",
         JSON.stringify(loggedAdmin)
       );
-      await dispatch(notify({ data: `Admin mode`, category: "success" }, 5));
       await dispatch(setLogged(loggedAdmin));
+      await dispatch(notify({ data: `Admin mode`, category: "success" }, 5));
     } catch (exception) {
-      console.log(exception);
+      await dispatch(notify({ data: `${exception}`, category: "error" }, 5));
     }
   };
 };

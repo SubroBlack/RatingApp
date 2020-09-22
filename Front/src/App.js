@@ -52,7 +52,7 @@ const App = () => {
           <Route path="/editUser">
             <EditUserForm />
           </Route>
-          <Route path="/item/:id">
+          <Route path="/items/:id">
             <Item />
           </Route>
           <Route path="/">

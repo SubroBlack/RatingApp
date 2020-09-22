@@ -17,8 +17,6 @@ const app = express();
 
 //Express json parser
 app.use(express.json());
-// To enable serving static build folder of frontend
-app.use(express.static("build"));
 
 mongoose
   .connect(config.MONGODB_URI, {
@@ -34,6 +32,7 @@ mongoose
       console.log("Connection to Database Failed: ", err);
     }
   );
+
 // CORS to allow Cross Origin Resource Sharing
 app.use(cors());
 // Body parser to parse the post objects
@@ -48,8 +47,14 @@ app.use("/api/user", userRouter);
 app.use("/api/login", loginRouter);
 app.use("/api/items/", itemsRouter(upload));
 
+// To enable serving static build folder of frontend
+app.use(express.static("build"));
+
 // Middlewares
-app.use(unknownEndpoint);
+app.use("/api*", unknownEndpoint);
 app.use(errorHandler);
+
+// Serve Static file
+app.use("/*", express.static("build"));
 
 module.exports = app;

@@ -27,8 +27,8 @@ const Auth = () => {
   // Logout function
   const signout = async (event) => {
     event.preventDefault();
-    await dispatch(AdminLogOut());
-    await dispatch(logOut());
+    dispatch(AdminLogOut());
+    dispatch(logOut());
     setForm(false);
     history.push("/");
   };

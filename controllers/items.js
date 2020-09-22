@@ -23,6 +23,7 @@ module.exports = (upload) => {
 
   // Fetching all the items in the DB by Admin
   itemsRouter.get("/", async (req, res, next) => {
+    console.log("Get Request for this Item: ", req.params.id);
     const user = req.user;
     const role = req.role;
     let items = [];
@@ -30,6 +31,7 @@ module.exports = (upload) => {
       return res.json(items.map((item) => item));
     }
     items = await Item.find({ user: user._id });
+    console.log("Get Request for this Item: ", items);
     //mongoose.connection.close();
     if (role === "admin") {
       res.json(items.map((item) => item.toJSON()));
@@ -40,6 +42,7 @@ module.exports = (upload) => {
 
   // Fetching single item according to Id
   itemsRouter.get("/:id", async (req, res, next) => {
+    console.log("Get Request for this Item: ", req.params.id);
     const user = req.user;
     const role = req.role;
     let items = [];
@@ -47,6 +50,7 @@ module.exports = (upload) => {
       return res.json(items.map((item) => item));
     }
     items = await Item.find({ user: user._id, _id: req.params.id });
+    console.log("Get Request for this Item: ", items);
     //mongoose.connection.close();
     if (role === "admin") {
       res.json(items.map((item) => item.toJSON()));

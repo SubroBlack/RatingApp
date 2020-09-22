@@ -21,6 +21,7 @@ const tokenExtractor = async (req, res, next) => {
 
 // Unknown endpoint handler
 const unknownEndpoint = (req, res) => {
+  console.log("Unknown Point Error: ", req.params);
   res.status(404).send({ error: "Unknown Endpoint" });
 };
 
