@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AppMenu = () => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const classes = useStyles();
   const history = useHistory();

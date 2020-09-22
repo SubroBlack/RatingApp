@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 
 const LoginForm = () => {
   // Login Form input
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const classes = useStyles();
 
@@ -39,9 +39,9 @@ const LoginForm = () => {
   // Submit the Login Form
   const handleLogin = async (event) => {
     event.preventDefault();
-    dispatch(signIn(email, password));
+    dispatch(signIn(name, password));
     // Clearing the Login Form
-    setEmail("");
+    setName("");
     setPassword("");
     history.push("/");
   };
@@ -59,10 +59,10 @@ const LoginForm = () => {
         <TextField
           required
           id="outlined-required"
-          label="Email"
-          name="email"
-          value={email}
-          onChange={({ target }) => setEmail(target.value)}
+          label="Name"
+          name="name"
+          value={name}
+          onChange={({ target }) => setName(target.value)}
           variant="outlined"
         />
         <br />

@@ -11,11 +11,11 @@ const setLogged = (user) => {
 };
 
 // Setting a user when signing in
-export const signIn = (email, password) => {
+export const signIn = (name, password) => {
   return async (dispatch) => {
     try {
       // Get User token from Server
-      const loggedUser = await loginService.login({ email, password });
+      const loggedUser = await loginService.login({ name, password });
       // Save User in the Browser
       window.localStorage.setItem(
         "loggedRatingAppUser",
@@ -24,7 +24,7 @@ export const signIn = (email, password) => {
       await dispatch(setLogged(loggedUser));
       await dispatch(notify({ data: `Welcome`, category: "success" }, 5));
     } catch (exception) {
-      await dispatch(notify({ data: exception, category: "error" }, 5));
+      await dispatch(notify({ data: `${exception}`, category: "error" }, 5));
     }
   };
 };
