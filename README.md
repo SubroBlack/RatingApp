@@ -1,13 +1,21 @@
 ## Rate APP
 
-WebApp focused on reviewing the Items and Services by the Customers on the Front Desk of the Service Provider.
+### Get Feedback from your in-store customers
 
-- The App enables customers to Rate and Comment on the Items/Services in User Mode
-- The App Menu opens with the click on the burger menu on the top right corner.
-- Successful SignIn leads to the User mode
+### Check the viability of new addition in your service in trial period
+
+### Monitor the customer service
+
+### Get feedbacks for daily specials
+
+## Features:
+
+- The App Menu opens with the click on the burger menu on the top left corner.
+- User Registration and Login
+- User Mode and Admin Modes are accessed from the App Menu
 - Posting Reviews and Rates is possible from User Mode on the Home Page
-- Admin Mode can be entered by clicking the Admin Mode on the Menu Bar and entering the admin pin
-- Adding and Editing Items for Review, checking the Rates and Reviews received and Editing the Profile can be Done from the Dashboard
+- Adding and Editing Items for Review/Ratings from the Dashboard
+- Checking the Rates and Reviews received and Editing the Profile from DashBoard
 
 ## Running the Project
 
@@ -36,6 +44,6 @@ https://stark-cliffs-67723.herokuapp.com/
 
 For Trial:
 
-- Name: Test
+- Name: test
 - Password: test
 - AdminPin: 1111

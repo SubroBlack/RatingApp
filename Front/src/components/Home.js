@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { allItems } from "../reducers/items";
 
+import LandingPage from "./LandingPage";
 import Carousel from "./Carousel";
 
 const Home = () => {
@@ -29,7 +30,7 @@ const Home = () => {
 
   const show = () => {
     if (items.length < 1) {
-      return null;
+      return <LandingPage />;
     }
     return <Carousel items={items} open={openItem} />;
   };
