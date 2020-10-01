@@ -1,0 +1,164 @@
+
+Date:   Thu Oct 1 13:21:24 2020 +0300
+Task:   Added Info Page and Modified ReadMe. Added Google Analytics code
+Time:   2.5hr
+
+Date:   Tue Sep 22 22:41:22 2020 +0300
+Task:   Error on Reloading Fixed, Login Using Username instead of Email, Modified ReadMe
+Time:   2
+
+Date:   Sun Sep 20 23:03:58 2020 +0300
+Task:   Added ReadMe, fixed Dashboard reloads and Item Mini
+Time    4
+
+Date:   Sat Sep 19 13:47:30 2020 +0300
+Task:   Carousel Buttons edited, Menu Styled, Review Button Styled
+Time    3
+
+Date:   Wed Sep 16 20:48:46 2020 +0300
+Task:   Comment Adding and Display, Syling 
+Time:   8 hrs
+
+Date:   Tue Sep 15 22:46:21 2020 +0300
+Task:   Single Item opened in New Page, Item mini created for display on the DashBoard
+Time:   5 hrs
+
+Date:   Sun Sep 13 23:18:08 2020 +0300
+Tasks:  UI Update
+Time:   6hrs
+
+
+Date:   Sat Sep 12 01:56:28 2020 +0300
+Tasks:  Forms Edited and Styles with Material UI
+Time:   5hrs
+
+Date:   Wed Sep 9 12:39:03 2020 +0300
+Tasks:  UI Update
+Time:   3hrs
+
+
+Date:   Mon Sep 7 19:55:45 2020 +0300
+Tasks:  Adding Rate from App
+Time:   5hrs
+
+Date:   Sun Sep 6 17:40:11 2020 +0300
+Tasks:  Added Material UI components in the FrontEnd, AppBar
+Time:   8hrs
+
+
+Date:   Fri Sep 4 18:53:14 2020 +0300
+Tasks:  Swipable Views package Added
+Time:   8
+
+Date:   Mon Aug 24 22:09:39 2020 +0300
+Tasks:  Carousel Removed
+Time:   3
+
+Date:   Tue Aug 18 22:40:22 2020 +0300
+Tasks:  Material UI Added Carousel
+Time:   6
+
+
+Date:   Mon Aug 17 22:12:44 2020 +0300
+Tasks:  Image Uploading/ Storing in MongoDB and Displaying on Front
+Detail: The tutorial didnt have lessons on Uploading Images to MongoDb, so I had to do lots of online research and try out many methods before I found that I liked
+Time:   30
+
+
+Date:   Sun Aug 9 13:18:24 2020 +0300
+Tasks:  Adding Posted dates on Items and Displaying
+Time:   1
+
+
+Date:   Fri Jul 31 12:27:09 2020 +0300
+Tasks:  Notification feature added
+Time:   4
+
+
+Date:   Wed Jul 29 13:20:36 2020 +0300
+Tasks:  Editing a User profile added
+Time:   5
+
+
+Date:   Tue Jul 28 13:14:16 2020 +0300
+Tasks:  Feature to Delete account added on Front
+Time:   3
+
+    
+
+Date:   Sun Jul 26 16:12:46 2020 +0300
+Tasks:  Feature to Signup from Frontend added, Added Feature to Delete the Item
+Time:   5
+    
+
+Date:   Sat Jul 25 17:01:47 2020 +0300
+Tasks:  Feature to Add and Edit items through Front, Rating and Fetching in the backend
+Time:   8
+
+
+Date:   Thu Jul 23 13:24:57 2020 +0300
+Tasks:  Added express-async-errors package to handle errors, Item Controller edited to return empty array in not authenticated in backend, Frontend fixed to update items when logged out
+Time:   4 hrs
+
+
+
+Date:   Wed Jul 22 16:40:45 2020 +0300
+Tasks:  Added Auth bar on home page,
+Time:   2.5 hrs
+    
+
+
+Date:   Tue Jul 21 12:18:12 2020 +0300
+Tasks:  Features to login and logout as user and admin added in backend and frontend, Auth: unauth --signin--> user --adminLogin--> admin --adminLogout--> user --signOut--> unauth
+Time:   7.5 hrs    
+
+
+Date:   Thu Jul 16 13:18:52 2020 +0300
+Tasks:  Added user login and admin login (admin login if user is logged in) and route endpoints to function accordingly
+Time:   4 hrs
+
+
+Date:   Mon Jul 13 16:08:36 2020 +0300
+Tasks:  Added backend feature to add user and sign in
+Time:   4.5
+
+
+
+Date:   Wed Jul 8 15:54:11 2020 +0300
+Tasks:  Heroku Setup Complete
+Time:   2
+    
+
+Date:   Tue Jul 7 17:37:35 2020 +0300
+Tasks:  Heroku App created
+Time:   2.5
+
+
+
+Date:   Mon Jul 6 17:39:52 2020 +0300
+Tasks:  Implemented React Router, Item Page
+Time:   6
+    
+
+Date:   Thu Jul 2 13:09:26 2020 +0300
+Tasks:  Implemented Redux on the frontend, fetching main items from store
+Time:   6 
+
+
+Date:   Tue Jun 30 22:38:10 2020 +0300
+Tasks:  Basic backend and frontend MERN stack app for adding items and receiving them
+Time:   13
+
+Date:   Jun 27
+Tasks:  Basic Setup of the App and concept including features
+Time:   7
+
+Date:   Jun 25
+Tasks:  Revision of the lessons
+Time:   5
+
+Date:   Jun 18
+Tasks:  Planning
+Time:   3
+
+TOTAL Hours: 191.5 HRS
