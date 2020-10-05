@@ -44,8 +44,6 @@ itemSchema.set("toJSON", {
     returnedDocument.id = returnedDocument._id.toString();
     delete returnedDocument._id;
     delete returnedDocument.__v;
-    // Hide the reviews
-    //delete returnedDocument.review;
   },
 });
 

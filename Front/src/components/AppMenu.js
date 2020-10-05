@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Auth from "./Auth";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -48,7 +48,6 @@ const AppMenu = () => {
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
-  const history = useHistory();
 
   const handleClick = () => {
     setOpen((prev) => !prev);
@@ -56,11 +55,6 @@ const AppMenu = () => {
 
   const handleClickAway = () => {
     setOpen(false);
-  };
-
-  // Home Button
-  const gotoHome = () => {
-    history.push("/");
   };
 
   return (
