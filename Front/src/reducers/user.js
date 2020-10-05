@@ -1,14 +1,22 @@
 import userService from "../services/user";
 import { notify } from "./notification";
 
-// Fetching a single Item
+// Action Type
+const SET_USER = "SET_USER";
+
+// Action Creator setting the user
+const setUser = (user) => {
+  return {
+    type: SET_USER,
+    user: user,
+  };
+};
+
+// Fetching a single User
 export const getUser = () => {
   return async (dispatch) => {
     const user = await userService.getUser();
-    dispatch({
-      type: "SET_USER",
-      data: user,
-    });
+    dispatch(setUser(user));
   };
 };
 
@@ -16,49 +24,38 @@ export const getUser = () => {
 export const addUser = (user) => {
   return async (dispatch) => {
     const newUser = await userService.newUser(user);
-    dispatch({
-      type: "SET_USER",
-      data: newUser,
-    });
+    dispatch(setUser(newUser));
     dispatch(
       notify({ data: `Welcome ${newUser.name}`, category: "success" }, 5)
     );
   };
 };
 
-// Editing an Item
+// Editing a User
 export const editUser = (user) => {
   return async (dispatch) => {
     const editedUser = await userService.editUser(user);
-    dispatch({
-      type: "SET_USER",
-      data: editedUser,
-    });
+    dispatch(setUser(editUser));
     dispatch(
       notify({ data: `${editedUser.name} updated`, category: "success" }, 5)
     );
   };
 };
 
-// Deleting the item
+// Deleting the User
 export const deleteUser = (user) => {
   return async (dispatch) => {
     await userService.deleteUser();
-    dispatch({
-      type: "DELETE",
-      data: user,
-    });
+    dispatch(setUser(null));
     dispatch(notify({ data: `CIAO ${user.name}`, category: "success" }, 3.5));
   };
 };
 
-// Items Reducer
+// User Reducer
 const userReducer = (state = [], action) => {
   switch (action.type) {
-    case "SET_USER":
-      return action.data;
-    case "DELETE":
-      return null;
+    case SET_USER:
+      return action.user;
     default:
       return state;
   }

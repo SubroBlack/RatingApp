@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { Input } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { adminSignIn } from "../reducers/login";
@@ -21,8 +20,6 @@ const AdminLoginForm = () => {
 
   // useDispatch hook to dispatch the Action
   const dispatch = useDispatch();
-  // useHistory to redirect
-  const history = useHistory();
 
   // Submit the AdminLogin Form
   const handleAdminLogin = async (event) => {

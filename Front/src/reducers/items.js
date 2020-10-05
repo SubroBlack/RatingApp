@@ -1,14 +1,25 @@
 import itemService from "../services/items";
 import { notify } from "./notification";
 
+// Action Types
+const ITEMS = "ITEMS";
+const NEW = "NEW";
+const EDITED = "EDITED";
+const DELETE = "DELETE";
+
+// Action Creator
+const action = (actionType, data) => {
+  return {
+    type: actionType,
+    data: data,
+  };
+};
+
 // Initializing Items
 export const allItems = () => {
   return async (dispatch) => {
     const items = await itemService.getAll();
-    dispatch({
-      type: "ITEMS",
-      data: items,
-    });
+    dispatch(action(ITEMS, items));
   };
 };
 
@@ -16,25 +27,18 @@ export const allItems = () => {
 export const getItem = (id) => {
   return async (dispatch) => {
     const item = await itemService.getItem(id);
-    console.log("Single Item fetched: ", item);
-    dispatch({
-      type: "GET_ITEM",
-      data: item,
-    });
+    dispatch(action(ITEMS, item));
   };
 };
 
 // Adding an Item
 export const addItem = (item) => {
   return async (dispatch) => {
-    const newItem = await itemService.addItem(item);
-    dispatch({
-      type: "NEW",
-      data: newItem,
-    });
+    const addedItem = await itemService.addItem(item);
+    dispatch(action(NEW, addedItem));
     dispatch(
       notify(
-        { data: `${newItem.name} added to collection`, category: "success" },
+        { data: `${addedItem.name} added to collection`, category: "success" },
         5
       )
     );
@@ -45,10 +49,7 @@ export const addItem = (item) => {
 export const editItem = (id, item) => {
   return async (dispatch) => {
     const editedItem = await itemService.editItem(id, item);
-    dispatch({
-      type: "EDITED",
-      data: editedItem,
-    });
+    dispatch(action(EDITED, editedItem));
     dispatch(
       notify(
         {
@@ -65,10 +66,7 @@ export const editItem = (id, item) => {
 export const rateItem = (id, rating) => {
   return async (dispatch) => {
     const ratedItem = await itemService.rateItem(id, rating);
-    dispatch({
-      type: "EDITED",
-      data: ratedItem,
-    });
+    dispatch(action(EDITED, ratedItem));
     dispatch(
       notify({ data: `Thank You for your feedback`, category: "success" }, 3.5)
     );
@@ -79,10 +77,7 @@ export const rateItem = (id, rating) => {
 export const deleteItem = (item) => {
   return async (dispatch) => {
     await itemService.removeItem(item.id);
-    dispatch({
-      type: "DELETE",
-      data: item,
-    });
+    dispatch(action(DELETE, item));
     dispatch(
       notify(
         { data: `${item.name} removed from collection`, category: "success" },
@@ -95,16 +90,14 @@ export const deleteItem = (item) => {
 // Items Reducer
 const itemsReducer = (state = [], action) => {
   switch (action.type) {
-    case "ITEMS":
+    case ITEMS:
       return action.data;
-    case "GET_ITEM":
-      return action.data;
-    case "NEW":
+    case NEW:
       return state.concat(action.data);
-    case "EDITED":
+    case EDITED:
       const other = state.filter((item) => item.id !== action.data.id);
       return other.concat(action.data);
-    case "DELETE":
+    case DELETE:
       return state.filter((obj) => obj.id !== action.data.id);
     default:
       return state;

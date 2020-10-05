@@ -34,7 +34,6 @@ export const signIn = (name, password) => {
       }
       await dispatch(setLogged(loggedUser));
     } catch (exception) {
-      console.log("Notification Reducer login err: ", exception);
       await dispatch(
         notify({ data: `Wrong Name or Password`, category: "error" }, 5)
       );

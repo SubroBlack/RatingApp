@@ -1,45 +1,40 @@
 let count = 0;
 let code = "";
 
-// Function to notify of anything
+// Action Type
+const NOTIFY = "NOTIFY";
+
 /*
   Notification = {data: "notification text", category: error/warning/success/info}
 */
-const setMessage = (message) => {
+// Action Creator to notify of anything
+const action = (msg) => {
   return {
-    type: "NOTIFY",
-    data: message,
-  };
-};
-
-const clear = () => {
-  count = 0;
-  return {
-    type: "CLEAR",
-    data: "",
+    type: NOTIFY,
+    msg: msg,
   };
 };
 
 // Setting notification with message to be displayed and duration of notification in sec
 export const notify = (message, sec) => {
   return async (dispatch) => {
-    dispatch(setMessage(message));
+    dispatch(action(message));
     count = count + 1;
     if (count > 1) {
+      console.log("Count: ", count);
       clearTimeout(code);
     }
     code = setTimeout(() => {
-      dispatch(clear());
+      count = 0;
+      dispatch(action(""));
     }, sec * 1000);
   };
 };
 
 const notificationReducer = (state = null, action) => {
   switch (action.type) {
-    case "NOTIFY":
-      return action.data;
-    case "CLEAR":
-      return action.data;
+    case NOTIFY:
+      return action.msg;
     default:
       return state;
   }

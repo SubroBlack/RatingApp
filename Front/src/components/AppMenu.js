@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Auth from "./Auth";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -70,7 +70,9 @@ const AppMenu = () => {
           <AppBar color="transparent" className={classes.appBar}>
             <Toolbar disableGutters={true} className={classes.toolbar}>
               <Typography variant="inherit" className={classes.title}>
-                <h3 onClick={gotoHome}>Rating App</h3>
+                <Link className="App-link" to="/">
+                  <h3>Rating App</h3>
+                </Link>
               </Typography>
               <Auth />
             </Toolbar>

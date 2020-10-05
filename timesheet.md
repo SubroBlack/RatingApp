@@ -4,8 +4,8 @@
 | : ----: |: ----- | : ----- |
 
 | Thu Oct 5 2020 +0300 |
-| Modified test credentials on ReadMe. Improved NOtification on wrong credentials and stop redirection on case of failed login, Login Reducer fixed with const, auth bar rectified |
-| 2.5hr |
+| Modified test credentials on ReadMe. Improved NOtification on wrong credentials and stop redirection on case of failed login, Login Reducer fixed with const, auth bar rectified, Action Creators and Action Types used in all reducers |
+| 4.5hr |
 
 | Thu Oct 1 13:21:24 2020 +0300 |
 | Added Info Page and Modified ReadMe. Added Google Analytics code |
