@@ -27,7 +27,6 @@ const Auth = () => {
   // Logout function
   const signout = async (event) => {
     event.preventDefault();
-    dispatch(AdminLogOut());
     dispatch(logOut());
     setForm(false);
     history.push("/");
@@ -64,6 +63,7 @@ const Auth = () => {
 
   // Check if the user is signedin or admin mode is on
   const display = () => {
+    console.log("Auth: ", loggedUser);
     if (!loggedUser || loggedUser.error) {
       return (
         <>

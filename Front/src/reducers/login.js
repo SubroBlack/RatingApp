@@ -2,10 +2,13 @@ import loginService from "../services/login";
 import helper from "../helper/helper";
 import { notify } from "./notification";
 
-// setting a logged user in the store
+//Action Types
+const SET_LOGGED = "SET_LOGGED";
+
+// setting a logged user in the store Action Creator
 const setLogged = (user) => {
   return {
-    type: "SET_LOGGED",
+    type: SET_LOGGED,
     user: user,
   };
 };
@@ -96,9 +99,7 @@ export const AdminLogOut = () => {
 // Login Reducer
 const loginReducer = (state = null, action) => {
   switch (action.type) {
-    case "SET_LOGGED":
-      return action.user;
-    case "CLEAR_LOGGED":
+    case SET_LOGGED:
       return action.user;
     default:
       return state;
