@@ -44,6 +44,6 @@ https://stark-cliffs-67723.herokuapp.com/
 
 For Trial:
 
-- Name: test
+- Name: Test
 - Password: test
 - AdminPin: 1111
