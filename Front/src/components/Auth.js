@@ -64,7 +64,7 @@ const Auth = () => {
 
   // Check if the user is signedin or admin mode is on
   const display = () => {
-    if (!loggedUser) {
+    if (!loggedUser || loggedUser.error) {
       return (
         <>
           <Button

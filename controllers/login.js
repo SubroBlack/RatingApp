@@ -13,8 +13,8 @@ loginRouter.post("/", async (req, res) => {
       : await bcrypt.compare(body.password, user.passwordHash);
 
   if (!(user && passwordCorrect)) {
-    return res.status(401).json({
-      error: "Invalid Email or Password",
+    return res.json({
+      error: "Invalid Username or Password",
     });
   }
 
@@ -38,7 +38,7 @@ loginRouter.post("/admin/", async (req, res) => {
       ? false
       : await bcrypt.compare(body.adminPin, user.adminPinHash);
   if (!(user && validAdmin)) {
-    return res.status(401).json({
+    return res.json({
       error: "Wrong Admin Pin",
     });
   }

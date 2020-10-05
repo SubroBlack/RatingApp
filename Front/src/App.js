@@ -27,6 +27,7 @@ const App = () => {
 
   // Logged in User
   const logged = useSelector((state) => state.logged);
+  console.log("Logged User: ", logged);
 
   return (
     <div className="App">

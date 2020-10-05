@@ -16,15 +16,25 @@ export const signIn = (name, password) => {
     try {
       // Get User token from Server
       const loggedUser = await loginService.login({ name, password });
-      // Save User in the Browser
-      window.localStorage.setItem(
-        "loggedRatingAppUser",
-        JSON.stringify(loggedUser)
-      );
+      if (loggedUser.token) {
+        // Save User in the Browser
+        window.localStorage.setItem(
+          "loggedRatingAppUser",
+          JSON.stringify(loggedUser)
+        );
+
+        await dispatch(notify({ data: `Welcome`, category: "success" }, 5));
+      } else {
+        await dispatch(
+          notify({ data: loggedUser.error, category: "error" }, 5)
+        );
+      }
       await dispatch(setLogged(loggedUser));
-      await dispatch(notify({ data: `Welcome`, category: "success" }, 5));
     } catch (exception) {
-      await dispatch(notify({ data: `${exception}`, category: "error" }, 5));
+      console.log("Notification Reducer login err: ", exception);
+      await dispatch(
+        notify({ data: `Wrong Name or Password`, category: "error" }, 5)
+      );
     }
   };
 };
@@ -54,13 +64,19 @@ export const adminSignIn = (adminPin) => {
     try {
       // Get User token from Server
       const loggedAdmin = await loginService.adminLogin({ adminPin });
-      // Save User in the Browser
-      window.localStorage.setItem(
-        "loggedRatingAppAdmin",
-        JSON.stringify(loggedAdmin)
-      );
-      await dispatch(setLogged(loggedAdmin));
-      await dispatch(notify({ data: `Admin mode`, category: "success" }, 5));
+      if (loggedAdmin.token) {
+        // Save User in the Browser
+        window.localStorage.setItem(
+          "loggedRatingAppAdmin",
+          JSON.stringify(loggedAdmin)
+        );
+        await dispatch(setLogged(loggedAdmin));
+        await dispatch(notify({ data: `Admin mode`, category: "success" }, 5));
+      } else {
+        await dispatch(
+          notify({ data: loggedAdmin.error, category: "error" }, 5)
+        );
+      }
     } catch (exception) {
       await dispatch(notify({ data: `${exception}`, category: "error" }, 5));
     }

@@ -40,6 +40,8 @@ Add .env file on the root folder with following info:
 
 ## Live Demo
 
+Successful "Join" requires "Login" to be logged in
+
 https://stark-cliffs-67723.herokuapp.com/
 
 For Trial:

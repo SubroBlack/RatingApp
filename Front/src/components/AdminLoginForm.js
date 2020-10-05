@@ -21,17 +21,15 @@ const AdminLoginForm = () => {
 
   // useDispatch hook to dispatch the Action
   const dispatch = useDispatch();
-
   // useHistory to redirect
   const history = useHistory();
 
-  // Submit the Login Form
+  // Submit the AdminLogin Form
   const handleAdminLogin = async (event) => {
     event.preventDefault();
     dispatch(adminSignIn(adminPin));
-    // Clearing the Login Form
+    // Clearing the AdminLogin Form
     setAdminPin("");
-    history.push("/dashboard");
   };
 
   return (

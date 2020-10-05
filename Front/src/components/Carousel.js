@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, MobileStepper } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { KeyboardArrowLeft, KeyboardArrowRight } from "@material-ui/icons/";
 import SwipeableViews from "react-swipeable-views";
